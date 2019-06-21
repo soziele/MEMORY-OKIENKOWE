@@ -124,11 +124,13 @@
   <ItemGroup>
     <ClCompile Include="Karta.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Plansza.cpp" />
     <ClCompile Include="Rozgrywka.cpp" />
     <ClCompile Include="Zasoby.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Karta.h" />
+    <ClInclude Include="Plansza.h" />
     <ClInclude Include="Rozgrywka.h" />
     <ClInclude Include="Zasoby.h" />
   </ItemGroup>
