@@ -75,6 +75,6 @@ KARTA PLANSZA::mieszaj(KARTA zestaw_kart[12])
 
 void PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA zestaw_kart[12])
 {
-	okno_gry->draw(zestaw_kart[1].obrazek);
+	zestaw_kart[1].obrazek.getPosition;
 	
 }
