@@ -5,13 +5,11 @@
 
 class ROZGRYWKA
 {
-private:
+	friend class PLANSZA;
 	
-	sf::Texture obrazek_zakryta;
-
 public:
 	
 	void aktualizuj(sf::RenderWindow*);
-	
+	friend void rysuj_sprites(sf::RenderWindow*,KARTA[12]);
 	ROZGRYWKA();
 };
