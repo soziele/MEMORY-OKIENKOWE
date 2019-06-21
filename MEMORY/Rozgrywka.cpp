@@ -28,20 +28,17 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	KARTA zestaw[12] = { karta1,karta2,karta3,karta4,karta5,karta6,karta7,karta8,karta9,karta10,karta11,karta12 };
 
 	PLANSZA Plansza(zestaw);
+
+	Plansza.wczytaj_pliki();
+	Plansza.zaladuj_sprites();
 	
 	while (Okno_gry->isOpen())
 	{
-		sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
-		sf::Texture cos;
-		cos.loadFromFile("kapczyk.bmp");
-		sf::Sprite fajnecos;
-		fajnecos.setTexture(cos);
-		fajnecos.setPosition(100, 100);
-
-
-
 		
+		Plansza.rysuj_sprites(Okno_gry, zestaw);
+
 		sf::Event zdarzenie;
+
 		while (Okno_gry->pollEvent(zdarzenie))
 		{
 
@@ -55,7 +52,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 			}
 			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 			{
-				Okno_gry->draw(fajnecos);
+				
 				
 			}
 
