@@ -5,10 +5,8 @@
 
 class ROZGRYWKA
 {
-private:
+	friend class PLANSZA;
 	
-	sf::Texture obrazek_zakryta;
-
 public:
 	
 	void aktualizuj(sf::RenderWindow*);
