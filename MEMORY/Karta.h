@@ -11,15 +11,15 @@ enum stan
 
 class KARTA
 {
+	friend class PLANSZA;
 private:
 	int indeks;
 	stan stan_karty=zakryta;
 	sf::Texture* obrazek_odkryta;
+	sf::Texture*obrazek_zakryta;
 	sf::Sprite obrazek;
 public:
-	void wczytaj_tekstury(sf::Texture, sf::Texture*);
-	void wyswietlaj_teksture(sf::Texture, sf::Texture*, sf::Sprite, stan);
-	KARTA(int indeks, sf::Texture* obrazek_odkryta, sf::Sprite obrazek) : indeks(indeks), obrazek_odkryta(obrazek_odkryta), obrazek(obrazek) {};
+	KARTA(int indeks) : indeks(indeks) {};
 	KARTA() {};
 
 };
