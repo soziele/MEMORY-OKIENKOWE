@@ -1,5 +1,7 @@
 #include"Rozgrywka.h"
 #include<fstream>
+#include<iostream>
+using namespace std;
 
 ROZGRYWKA::ROZGRYWKA()
 {
@@ -31,16 +33,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	
 	while (Okno_gry->isOpen())
 	{
-		sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
-		sf::Texture cos;
-		cos.loadFromFile("kapczyk.bmp");
-		sf::Sprite fajnecos;
-		fajnecos.setTexture(cos);
-		fajnecos.setPosition(100, 100);
 
-
-
-		
 		sf::Event zdarzenie;
 		while (Okno_gry->pollEvent(zdarzenie))
 		{
@@ -49,17 +42,62 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 			{
 				Okno_gry->close();
 			}
+			/*
 			if (zdarzenie.type == sf::Event::MouseMoved)
 			{
 				sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_gry);
+				
+				int i = 0, j = 0, X, Y;
+				X = pozycja_myszy_ruch.x;
+				Y = pozycja_myszy_ruch.y;
+
+				while (i < 6 && j < 2)
+				{
+					if (X > (30 + (i * 160)) && X < (169 + (i * 160)))
+					{
+						if (Y > (100 + (i * 240)) && Y < (319 + (i * 240)))
+						{
+							cout << "KURWAAA" << endl;
+						}
+					}
+					if (i == 5) 
+					{
+						j++;
+					}
+					i++;
+				}
 			}
+			*/
 			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 			{
-				Okno_gry->draw(fajnecos);
 				
 			}
 
+
+			sf::Vector2i pozycja_myszy = sf::Mouse::getPosition(*Okno_gry);
+
+			int i = 0, j = 0, X, Y;
+			X = pozycja_myszy.x;
+			Y = pozycja_myszy.y;
+
+			while (i < 6 && j < 2)
+			{
+				if (X > (30 + (i * 160)) && X < (169 + (i * 160)))
+				{
+					if (Y > (100 + (j * 240)) && Y < (319 + (j * 240)))
+					{
+						cout << "KURWAAA" << endl;
+					}
+				}
+				if (i == 5)
+				{
+					j++;
+					i = -1;
+				}
+				i++;
+			}
 			
+
 		}
 		Okno_gry->display();
 	}
