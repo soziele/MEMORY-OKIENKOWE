@@ -125,10 +125,12 @@
     <ClCompile Include="Karta.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rozgrywka.cpp" />
+    <ClCompile Include="Zasoby.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Karta.h" />
     <ClInclude Include="Rozgrywka.h" />
+    <ClInclude Include="Zasoby.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
