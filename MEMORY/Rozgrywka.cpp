@@ -71,6 +71,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 					if (Y > (100 + (j * 240)) && Y < (319 + (j * 240)))
 					{
 						//Instrukcja Podœwietlania kart
+						
 					}
 				}
 				if (i == 5)
