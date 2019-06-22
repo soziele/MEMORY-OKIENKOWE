@@ -70,9 +70,24 @@ KARTA PLANSZA::mieszaj(KARTA zestaw_kart[12])
 }
 
 
-KARTA PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA karta)
+KARTA PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA karta, float x, float y)
 {
-		okno_gry->draw(obrazek);
-		
+	
+	obrazek.setPosition(x,y);
+	okno_gry->draw(obrazek);
+	
+	return karta;
+}
+
+KARTA PLANSZA::podswietl(KARTA karta, int x1, int x2, int y1, int y2)
+{
+	if (obrazek.getPosition().x > x1 && obrazek.getPosition().x < x2)
+	{
+		if (obrazek.getPosition().y > y1 && obrazek.getPosition().y < y2)
+		{
+			obrazek.setScale(2, 2);
+		}
+
+	}
 	return karta;
 }

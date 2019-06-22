@@ -11,6 +11,7 @@ int main()
 	
 	while (Okno_gry.isOpen())
 	{
+		
 		Gra.aktualizuj(&Okno_gry);
 	}
 

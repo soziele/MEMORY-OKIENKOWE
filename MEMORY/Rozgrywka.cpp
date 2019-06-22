@@ -43,18 +43,33 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	Okno_gry->display();
 	*/
 
-	for (int i = 0; i < 12; i++)
-	{
-		Plansza.wczytaj_pliki(zestaw[i]);
-		Plansza.zaladuj_sprites(zestaw[i]);
-		Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
-	}
-	Okno_gry->display();
+	
 	
 	
 	while (Okno_gry->isOpen())
 	{
-		
+
+		float X = 30, Y = 100;
+		for (int i = 0; i < 6; i++)
+		{
+			Plansza.wczytaj_pliki(zestaw[i]);
+			Plansza.zaladuj_sprites(zestaw[i]);
+			Plansza.rysuj_sprites(Okno_gry, zestaw[i], X, Y);
+			
+			X += 200;
+		}
+		Y += 250;
+		X -= 1200;
+		for (int i = 6; i < 12; i++)
+		{
+			Plansza.wczytaj_pliki(zestaw[i]);
+			Plansza.zaladuj_sprites(zestaw[i]);
+			Plansza.rysuj_sprites(Okno_gry, zestaw[i], X, Y);
+			
+			X += 200;
+		}
+
+		Okno_gry->display();
 		
 		
 
@@ -76,6 +91,10 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 			{
 				sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
+				for (int t = 0; t < 12; t++)
+				{
+					
+				}
 
 			}
 
@@ -91,8 +110,17 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				{
 					if (Y > (100 + (j * 240)) && Y < (319 + (j * 240)))
 					{
+						
 						//Instrukcja Podœwietlania kart
-						//zestaw[1].setStan(odkryta);
+						for (int a = 0; a < 12; a++)
+						{
+							int x_owa1 = 30 + (i * 160);
+							int x_owa2 = 169 + (i * 160);
+							int y_owa1 = 100 + (j * 240);
+							int y_owa2 = 319 + (j * 240);
+						
+							Plansza.podswietl(zestaw[i],x_owa1,x_owa2, y_owa1, y_owa2);
+						}
 						
 					}
 				}
@@ -103,6 +131,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				}
 				i++;
 			}
+
 		}
 	}
 }
