@@ -19,6 +19,14 @@ private:
 	sf::Texture obrazek_zakryta;
 	sf::Sprite obrazek;
 public:
+	void setStan(stan stan)
+	{
+		this->stan_karty = stan;
+	}
+	stan getStan()
+	{
+		return stan_karty;
+	}
 	KARTA(int indeks) : indeks(indeks) {};
 	KARTA() {};
 

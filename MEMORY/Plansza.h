@@ -3,6 +3,7 @@
 #include"Rozgrywka.h"
 
 
+
 class PLANSZA:public KARTA
 {
 private:
@@ -11,6 +12,6 @@ public:
 	KARTA wczytaj_pliki(KARTA[12]);
 	KARTA zaladuj_sprites(KARTA[12]);
 	KARTA mieszaj(KARTA[12]);
-	void rysuj_sprites(sf::RenderWindow*, KARTA[12]);
+	KARTA rysuj_sprites(sf::RenderWindow*, KARTA[12]);
 	PLANSZA(KARTA zestaw_kart[12]) {};
 };
