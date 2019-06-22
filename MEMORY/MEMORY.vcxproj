@@ -135,6 +135,12 @@
     <ClInclude Include="Zasoby.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="01.png" />
+    <Image Include="02.png" />
+    <Image Include="03.png" />
+    <Image Include="04.png" />
+    <Image Include="05.png" />
+    <Image Include="06.png" />
     <Image Include="img\zakryta.png">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

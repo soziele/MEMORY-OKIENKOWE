@@ -92,12 +92,16 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 			{
 				sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
-				for (int t = 0; t < 12; t++)
+				for (int t = 0; t <12 ; t++)
 				{
+					Okno_gry->clear();
 					zestaw[t].setStan(odkryta);
 					Plansza.zaladuj_sprites(zestaw[t]);
+					
 					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
-					t++;
+					
+					Okno_gry->display();
+					
 				}
 
 			}
@@ -125,11 +129,8 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 						
 							Plansza.podswietl(zestaw[a], x_owa1, x_owa2, y_owa1, y_owa2);
 
-							zestaw[a].setStan(odkryta);
-							Plansza.zaladuj_sprites(zestaw[a]);
-							
 							Plansza.rysuj_sprites(Okno_gry, zestaw[a]);
-							a++;
+						
 						}
 
 						

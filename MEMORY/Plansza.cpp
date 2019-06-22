@@ -12,40 +12,40 @@ KARTA PLANSZA::wczytaj_pliki(KARTA karta)
 		obrazek_zakryta.loadFromFile("zakryta.png");
 	
 	
-	if(indeks=1)
+	if(karta.indeks==1)
 	{
-		obrazek_odkryta.loadFromFile("kapczyk.bmp");
+		obrazek_odkryta.loadFromFile("01.png");
 	}
-	if(indeks=2)
+	else if(karta.indeks==2)
 	{
-		obrazek_odkryta.loadFromFile("kapczyk.bmp");
+		obrazek_odkryta.loadFromFile("02.png");
 	}
-	if(indeks=3)
+	else if(karta.indeks==3)
 	{
-		obrazek_odkryta.loadFromFile("kapczyk.bmp");
+		obrazek_odkryta.loadFromFile("03.png");
 	}
-	if(indeks=4)
+	else if(karta.indeks==4)
 	{
-		obrazek_odkryta.loadFromFile("kapczyk.bmp");
+		obrazek_odkryta.loadFromFile("04.png");
 	}
-	if(indeks=5)
+	else if(karta.indeks==5)
 	{
-		obrazek_odkryta.loadFromFile("kapczyk.bmp");
+		obrazek_odkryta.loadFromFile("05.png");
 	}
-	if(indeks=6)
+	else if(karta.indeks==6)
 	{
-		obrazek_odkryta.loadFromFile("kapczyk.bmp");
+		obrazek_odkryta.loadFromFile("06.png");
 	}
 	return karta;
 }
 
 KARTA PLANSZA::zaladuj_sprites(KARTA karta)
 {
-		if (stan_karty == zakryta)
+		if (karta.stan_karty == zakryta)
 		{
 			obrazek.setTexture(obrazek_zakryta);
 		}
-		else if (stan_karty ==odkryta)
+		else if (karta.stan_karty ==odkryta)
 		{
 			obrazek.setTexture(obrazek_odkryta);
 		}
@@ -65,7 +65,7 @@ KARTA PLANSZA::mieszaj(KARTA zestaw_kart[12])
 		x = (rand() % 8);
 		zestaw_kart[i] = zestaw_kart[x];
 		zestaw_kart[x] = przechowanie;
-		i++;
+		
 	}
 	return *zestaw_kart;
 }
