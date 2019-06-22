@@ -65,15 +65,14 @@ KARTA PLANSZA::mieszaj(KARTA zestaw_kart[12])
 		x = (rand() % 8);
 		zestaw_kart[i] = zestaw_kart[x];
 		zestaw_kart[x] = przechowanie;
+		i++;
 	}
 	return *zestaw_kart;
 }
 
 
-KARTA PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA karta, float x, float y)
+KARTA PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA karta)
 {
-	
-	obrazek.setPosition(x,y);
 	okno_gry->draw(obrazek);
 	
 	return karta;
@@ -89,5 +88,11 @@ KARTA PLANSZA::podswietl(KARTA karta, int x1, int x2, int y1, int y2)
 		}
 
 	}
+	return karta;
+}
+
+KARTA PLANSZA::pozycja_sprite(KARTA karta, float x, float y)
+{
+	obrazek.setPosition(x, y);
 	return karta;
 }

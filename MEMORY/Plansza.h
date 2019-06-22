@@ -8,10 +8,11 @@ class PLANSZA:public KARTA
 {
 
 public:
+	KARTA pozycja_sprite(KARTA, float, float);
 	KARTA wczytaj_pliki(KARTA);
 	KARTA zaladuj_sprites(KARTA);
 	KARTA mieszaj(KARTA[12]);
-	KARTA rysuj_sprites(sf::RenderWindow*, KARTA, float, float);
+	KARTA rysuj_sprites(sf::RenderWindow*, KARTA);
 	KARTA podswietl(KARTA, int, int, int, int);
 	PLANSZA() {};
 };

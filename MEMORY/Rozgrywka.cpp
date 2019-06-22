@@ -54,19 +54,20 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 		{
 			Plansza.wczytaj_pliki(zestaw[i]);
 			Plansza.zaladuj_sprites(zestaw[i]);
-			Plansza.rysuj_sprites(Okno_gry, zestaw[i], X, Y);
-			
-			X += 200;
+			Plansza.pozycja_sprite(zestaw[i], X, Y);
+			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+			X += 160;
 		}
-		Y += 250;
-		X -= 1200;
+		Y += 240;
+		X -= 960;
 		for (int i = 6; i < 12; i++)
 		{
 			Plansza.wczytaj_pliki(zestaw[i]);
 			Plansza.zaladuj_sprites(zestaw[i]);
-			Plansza.rysuj_sprites(Okno_gry, zestaw[i], X, Y);
+			Plansza.pozycja_sprite(zestaw[i], X, Y);
+			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
 			
-			X += 200;
+			X += 160;
 		}
 
 		Okno_gry->display();
@@ -93,7 +94,10 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
 				for (int t = 0; t < 12; t++)
 				{
-					
+					zestaw[t].setStan(odkryta);
+					Plansza.zaladuj_sprites(zestaw[t]);
+					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+					t++;
 				}
 
 			}
@@ -119,8 +123,15 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 							int y_owa1 = 100 + (j * 240);
 							int y_owa2 = 319 + (j * 240);
 						
-							Plansza.podswietl(zestaw[i],x_owa1,x_owa2, y_owa1, y_owa2);
+							Plansza.podswietl(zestaw[a], x_owa1, x_owa2, y_owa1, y_owa2);
+
+							zestaw[a].setStan(odkryta);
+							Plansza.zaladuj_sprites(zestaw[a]);
+							
+							Plansza.rysuj_sprites(Okno_gry, zestaw[a]);
+							a++;
 						}
+
 						
 					}
 				}
