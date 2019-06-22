@@ -14,7 +14,7 @@ class KARTA
 	friend class PLANSZA;
 private:
 	int indeks;
-	stan stan_karty=zakryta;
+	stan stan_karty=odkryta;
 	sf::Texture obrazek_odkryta;
 	sf::Texture obrazek_zakryta;
 	sf::Sprite obrazek;

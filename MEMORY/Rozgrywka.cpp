@@ -43,7 +43,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	Okno_gry->display();
 	*/
 
-	
+	Plansza.mieszaj(zestaw);
 	
 	
 	while (Okno_gry->isOpen())
@@ -69,7 +69,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 			
 			X += 160;
 		}
-
+		
 		Okno_gry->display();
 		
 		
