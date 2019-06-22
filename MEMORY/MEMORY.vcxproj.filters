@@ -49,5 +49,11 @@
     <Image Include="img\zakryta.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="kapczyk.bmp">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="zakryta.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>

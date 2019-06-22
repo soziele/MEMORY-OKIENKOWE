@@ -27,22 +27,35 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 	KARTA zestaw[12] = { karta1,karta2,karta3,karta4,karta5,karta6,karta7,karta8,karta9,karta10,karta11,karta12 };
 
-	PLANSZA Plansza(zestaw);
+	PLANSZA Plansza;
 
-	Plansza.wczytaj_pliki(zestaw);
-	
+	Okno_gry->clear();
+	/*
 	sf::Texture cos;
-	cos.loadFromFile("./img/zakryta.png");
+	cos.loadFromFile("zakryta.png");
 	sf::Sprite nwm;
 	nwm.setTexture(cos);
 	Okno_gry->draw(nwm);
 	
+	Plansza.zaladuj_sprites(karta1);
+	Plansza.mieszaj(zestaw);
+	Plansza.rysuj_sprites(Okno_gry, karta1);
+	Okno_gry->display();
+	*/
+
+	for (int i = 0; i < 12; i++)
+	{
+		Plansza.wczytaj_pliki(zestaw[i]);
+		Plansza.zaladuj_sprites(zestaw[i]);
+		Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+	}
+	Okno_gry->display();
+	
+	
 	while (Okno_gry->isOpen())
 	{
 		
-		Plansza.zaladuj_sprites(zestaw);
-		Plansza.mieszaj(zestaw);
-		Plansza.rysuj_sprites(Okno_gry, zestaw);
+		
 		
 
 		sf::Event zdarzenie;

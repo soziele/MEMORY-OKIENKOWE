@@ -6,12 +6,11 @@
 
 class PLANSZA:public KARTA
 {
-private:
-	KARTA zestaw_kart[12];
+
 public:
-	KARTA wczytaj_pliki(KARTA[12]);
-	KARTA zaladuj_sprites(KARTA[12]);
+	KARTA wczytaj_pliki(KARTA);
+	KARTA zaladuj_sprites(KARTA);
 	KARTA mieszaj(KARTA[12]);
-	KARTA rysuj_sprites(sf::RenderWindow*, KARTA[12]);
-	PLANSZA(KARTA zestaw_kart[12]) {};
+	KARTA rysuj_sprites(sf::RenderWindow*, KARTA);
+	PLANSZA() {};
 };
