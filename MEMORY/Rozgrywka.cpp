@@ -94,12 +94,12 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
 				for (int t = 0; t <12 ; t++)
 				{
-					Okno_gry->clear();
-					zestaw[t].setStan(odkryta);
+					if()
+					zestaw[t].setStan(zakryta);
 					Plansza.zaladuj_sprites(zestaw[t]);
 					
 					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
-					
+					Okno_gry->clear();
 					Okno_gry->display();
 					
 				}
