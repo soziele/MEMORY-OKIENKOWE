@@ -2,13 +2,16 @@
 #include <cstdlib>
 #include <cstdio>
 #include <ctime>
+#include<fstream>
+
+using namespace sf;
 
 KARTA PLANSZA::wczytaj_pliki(KARTA zestaw_kart[12])
 {
 	
 	for (int i = 0; i < 12; i++)
 	{
-		zestaw_kart[i].obrazek_zakryta.loadFromFile("kapczyk.bmp");
+		zestaw_kart[i].obrazek_zakryta.loadFromFile("zakryta.png");
 	}
 	
 	for (int i=0;i<2; i++)
@@ -73,8 +76,12 @@ KARTA PLANSZA::mieszaj(KARTA zestaw_kart[12])
 }
 
 
-void PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA zestaw_kart[12])
+KARTA PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA zestaw_kart[12])
 {
-	zestaw_kart[1].obrazek.getPosition;
+	sf::Image image;
+	image.loadFromFile("zakryta.png");
+	zestaw_kart[1].obrazek_zakryta.loadFromImage(image, IntRect());
+	if(zestaw_kart[1].obrazek_zakryta.loadFromFile("zakryta.png")==false) okno_gry->close();
 	
+	return *zestaw_kart;
 }

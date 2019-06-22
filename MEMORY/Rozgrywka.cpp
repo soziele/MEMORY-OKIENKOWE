@@ -1,6 +1,8 @@
 #include"Rozgrywka.h"
 #include<fstream>
 
+using namespace sf;
+
 ROZGRYWKA::ROZGRYWKA()
 {
 	
@@ -29,6 +31,11 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 	Plansza.wczytaj_pliki(zestaw);
 	
+	sf::Texture cos;
+	cos.loadFromFile("./img/zakryta.png");
+	sf::Sprite nwm;
+	nwm.setTexture(cos);
+	Okno_gry->draw(nwm);
 	
 	while (Okno_gry->isOpen())
 	{
@@ -42,6 +49,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 		while (Okno_gry->pollEvent(zdarzenie))
 		{
+			
 			if (zdarzenie.type == sf::Event::Closed)
 			{
 				Okno_gry->close();
@@ -71,6 +79,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 					if (Y > (100 + (j * 240)) && Y < (319 + (j * 240)))
 					{
 						//Instrukcja Podœwietlania kart
+						//zestaw[1].setStan(odkryta);
 						
 					}
 				}
