@@ -13,6 +13,7 @@ public:
 	KARTA zaladuj_sprites(KARTA);
 	KARTA mieszaj(KARTA[12]);
 	KARTA rysuj_sprites(sf::RenderWindow*, KARTA);
-	KARTA podswietl(KARTA,int);
+	KARTA podswietl(KARTA,float);
+	bool czy_to_ta_karta(KARTA, Vector2i);
 	PLANSZA() {};
 };

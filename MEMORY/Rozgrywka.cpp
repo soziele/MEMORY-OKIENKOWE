@@ -108,49 +108,76 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	*/
 
 	Plansza.mieszaj(zestaw);
+
+	float X = 30, Y = 100;
+	for (int i = 0; i < 6; i++)
+	{
+		Plansza.wczytaj_pliki(zestaw[i]);
+		Plansza.zaladuj_sprites(zestaw[i]);
+		Plansza.pozycja_sprite(zestaw[i], X, Y);
+		Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+		X += 160;
+	}
+	Y += 240;
+	X -= 960;
+	for (int i = 6; i < 12; i++)
+	{
+		Plansza.wczytaj_pliki(zestaw[i]);
+		Plansza.zaladuj_sprites(zestaw[i]);
+		Plansza.pozycja_sprite(zestaw[i], X, Y);
+		Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+
+		X += 160;
+	}
+
+	Okno_gry->display();
+
 	
 	
 	while (Okno_gry->isOpen())
 	{
 
-		
-		
-		
+
 
 		sf::Event zdarzenie;
 
 		while (Okno_gry->pollEvent(zdarzenie))
 		{
-			
+
 			if (zdarzenie.type == sf::Event::Closed)
 			{
 				Okno_gry->close();
 			}
-			/*
-			if (zdarzenie.type == sf::Event::MouseMoved)
-			{
-				sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_gry);
-			}
-			*/
-			
+
+
 			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 			{
-				/*
-				for (int t = 0; t <12 ; t++)
+
+				sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
+				for (int t = 0; t < 12; t++)
 				{
-					
-					zestaw[t].setStan(zakryta);
-					Plansza.zaladuj_sprites(zestaw[t]);
-					
-					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
-					Okno_gry->clear();
-					Okno_gry->display();
-					
+					if (Plansza.czy_to_ta_karta(zestaw[t], pozycja_myszy_klik) == true)
+					{
+						zestaw[t].setStan(zakryta);
+						Plansza.zaladuj_sprites(zestaw[t]);
+						Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+						Okno_gry->display();
+						break;
+
+					}
+					else
+					{
+						Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+						//Okno_gry->display();
+					}
+
 				}
-				*/
+				
+
 			}
 
 			sf::Vector2i pozycja_myszy = sf::Mouse::getPosition(*Okno_gry);
+
 
 			int i = 0, j = 0, X, Y;
 			X = pozycja_myszy.x;
@@ -162,31 +189,37 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				{
 					if (Y > (100 + (j * 240)) && Y < (319 + (j * 240)))
 					{
-						Plansza.podswietl(zestaw[i + (6 * j+1)], 2);
-
-						//Instrukcja Podœwietlania kart
-						/*
-						for (int a = 0; a < 12; a++)
+						for (int t = 0; t < 12; t++)
 						{
-							int x_owa1 = 30 + (i * 160);
-							int x_owa2 = 169 + (i * 160);
-							int y_owa1 = 100 + (j * 240);
-							int y_owa2 = 319 + (j * 240);
+							/*
+							Sprite obrazek = zestaw[t].getObrazek();
+							sf::Vector2f pozycja_obrazka = obrazek.getPosition();
+							if (pozycja_obrazka.x >= 30 + (i * 160) && pozycja_obrazka.x <= 169 + (i * 160))
+							{
+								if (pozycja_obrazka.y >= 100 + (j * 240) && pozycja_obrazka.y <= 319 + (j * 240))
+								{
+									Plansza.podswietl(zestaw[t], 1.1);
+								}
+							}
+							Plansza.zaladuj_sprites(zestaw[t]);
 
-							Plansza.podswietl(zestaw[a], x_owa1, x_owa2, y_owa1, y_owa2);
-
-							Plansza.rysuj_sprites(Okno_gry, zestaw[a]);
-
+							Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+							Okno_gry->clear();
+							Okno_gry->display();
 
 						}
 						*/
+						}
+						//Plansza.podswietl(zestaw[i + (6 * j)], 1.1);
+						//Plansza.rysuj_sprites(Okno_gry, zestaw[i+(6*j)]);
+						//Okno_gry->display();
 
 					}
 				}
 				else
 				{
-					Okno_gry->clear();
-					Plansza.podswietl(zestaw[i + (6 * j)+1], 1);
+
+					Plansza.podswietl(zestaw[i + (6 * j)], 1);
 				}
 
 				if (i == 5)
@@ -200,27 +233,5 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 			}
 		}
 
-		float X = 30, Y = 100;
-		for (int i = 0; i < 6; i++)
-		{
-			Plansza.wczytaj_pliki(zestaw[i]);
-			Plansza.zaladuj_sprites(zestaw[i]);
-			Plansza.pozycja_sprite(zestaw[i], X, Y);
-			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
-			X += 160;
-		}
-		Y += 240;
-		X -= 960;
-		for (int i = 6; i < 12; i++)
-		{
-			Plansza.wczytaj_pliki(zestaw[i]);
-			Plansza.zaladuj_sprites(zestaw[i]);
-			Plansza.pozycja_sprite(zestaw[i], X, Y);
-			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
-
-			X += 160;
-		}
-
-		Okno_gry->display();
 	}
 }
