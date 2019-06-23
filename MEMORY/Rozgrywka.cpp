@@ -127,7 +127,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 	while (Okno_gry->isOpen())
 	{
-
+		int k1 = 0, k2 = 0, dwa = 0;
 		float X = 30, Y = 100;
 		for (int i = 0; i < 6; i++)
 		{
@@ -146,13 +146,13 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 			X += 160;
 		}
-
+		sf:Time time = sf::seconds(1);
 
 		sf::Event zdarzenie;
 
 		while (Okno_gry->pollEvent(zdarzenie))
 		{
-			
+
 			if (zdarzenie.type == sf::Event::Closed)
 			{
 				Okno_gry->close();
@@ -181,18 +181,58 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 			sf::Vector2i pozycja_myszy = sf::Mouse::getPosition(*Okno_gry);
 			
+
 			for (int t = 0; t < 12; t++)
 			{
 
 				if (Plansza.czy_to_ta_karta(&zestaw[t], pozycja_myszy))
 				{
-					Plansza.podswietl(&zestaw[t], 1.1);
+					Plansza.podswietl(&zestaw[t], 1.025);
 				}
 				else
 				{
 					Plansza.podswietl(&zestaw[t], 1);
 				}
 			}
+
+			for (int t = 0; t < 12; t++)
+			{
+				if (dwa != 2)
+				{
+					if (zestaw[t].getStan() == odkryta)
+					{
+						dwa++;
+
+						if (k1 == 0)
+						{
+							k1 = t;
+						}
+						else
+						{
+							k2 = t;
+						}
+					}
+				}
+				else
+				{
+					Plansza.podswietl(&zestaw[k2], 1);
+					rysuj_wszystko(Okno_gry);
+					sleep(time);
+					zestaw[k1].setStan(zakryta);
+					zestaw[k2].setStan(zakryta);
+					
+					dwa = 0;
+					k1 = 0;
+					k2 = 0;
+
+					
+				}
+				
+			}
+
+
+
+
 
 		}
 		rysuj_wszystko(Okno_gry);
