@@ -110,30 +110,34 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	
 
 
-	float X = 30, Y = 100;
-	for (int i = 0; i < 6; i++)
-	{
-		Plansza.wczytaj_pliki(zestaw[i]);
-		Plansza.zaladuj_sprites(zestaw[i]);
-		Plansza.pozycja_sprite(zestaw[i], X, Y);
-		Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
-		X += 160;
-	}
-	Y += 240;
-	X -= 960;
-	for (int i = 6; i < 12; i++)
-	{
-		Plansza.wczytaj_pliki(zestaw[i]);
-		Plansza.zaladuj_sprites(zestaw[i]);
-		Plansza.pozycja_sprite(zestaw[i], X, Y);
-		Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
-
-		X += 160;
-	}
+	
 
 
 	while (Okno_gry->isOpen())
 	{
+		Okno_gry->clear();
+		float X = 30, Y = 100;
+		for (int i = 0; i < 6; i++)
+		{
+			Plansza.wczytaj_pliki(zestaw[i]);
+			Plansza.zaladuj_sprites(zestaw[i]);
+			Plansza.pozycja_sprite(zestaw[i], X, Y);
+			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+			X += 160;
+		}
+		Y += 240;
+		X -= 960;
+		for (int i = 6; i < 12; i++)
+		{
+			Plansza.wczytaj_pliki(zestaw[i]);
+			Plansza.zaladuj_sprites(zestaw[i]);
+			Plansza.pozycja_sprite(zestaw[i], X, Y);
+			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+
+			X += 160;
+		}
+
+
 		sf::Event zdarzenie;
 
 		while (Okno_gry->pollEvent(zdarzenie))
@@ -155,39 +159,40 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 					{
 						zestaw[t].setStan(zakryta);
 						Plansza.zaladuj_sprites(zestaw[t]);
-						Okno_gry->clear();
-						Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
 
 					}
-					else Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+
 
 				}
+
 
 
 			}
 
 			sf::Vector2i pozycja_myszy = sf::Mouse::getPosition(*Okno_gry);
+			
 			for (int t = 0; t < 12; t++)
 			{
 
 				if (Plansza.czy_to_ta_karta(zestaw[t], pozycja_myszy))
 				{
 					Plansza.podswietl(zestaw[t], 1.1);
-					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+					
 					break;
 				}
 				else
 				{
 					Plansza.podswietl(zestaw[t], 1);
-					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+					
 				}
 
 
 			}
-
-			}
+			
+			Okno_gry->display();
+		}
 		
-		Okno_gry->display();
+		
 		}
 	
 
