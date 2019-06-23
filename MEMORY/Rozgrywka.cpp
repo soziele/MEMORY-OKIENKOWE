@@ -62,10 +62,7 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 	wyjscie.setPosition(614, 500);
 	while (Okno_menu->isOpen())
 	{
-		Okno_menu->draw(start);
-		Okno_menu->draw(co_to);
-		Okno_menu->draw(wyjscie);
-		Okno_menu->display();
+		Okno_menu->clear();
 
 		sf::Event zdarzenie;
 		while (Okno_menu->pollEvent(zdarzenie))
@@ -91,22 +88,64 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 							sf::Text tekst;
 							sf::Font font;
 							font.loadFromFile("HandVetica.ttf");
-							tekst.setString("Jest to gra o odkrywaniu kart. Gracz wygrywa w momencie, gry odnajdzie wszystkie zakryte pary.");
+							tekst.setString("Niniejsza aplikacja to gra polegajaca na \nodnajdywaniu par w zestawie zakrytych kart. \nKazda proba polaczenia kart w pare to jedna tura gracza. \nGra konczy sie w momencie, gdy wszystkie karty \nznikna z planszy. Powodzenia!");
 							tekst.setFont(font);
 							Okno_info.draw(tekst);
+							sf::Event zdarzenie;
+
+							while (Okno_info.pollEvent(zdarzenie))
+							{
+
+								if (zdarzenie.type == sf::Event::Closed)
+								{
+									Okno_info.close();
+								}
+							}
 							Okno_info.display();
+
+						}
+
+					}
+					if (pozycja_myszy_klik.x > 614 && pozycja_myszy_klik.x < 980)
+					{
+						if (pozycja_myszy_klik.y > 500 && pozycja_myszy_klik.y < 580)
+						{
+							exit(EXIT_FAILURE);
 						}
 					}
-				}
-				if (pozycja_myszy_klik.x > 614 && pozycja_myszy_klik.x < 980)
-				{
-					if (pozycja_myszy_klik.y > 500 && pozycja_myszy_klik.y < 580)
-					{
-						exit(EXIT_FAILURE);
-					}
+
 				}
 			}
 		}
+		sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_menu);
+		if (pozycja_myszy_ruch.x > 685 && pozycja_myszy_ruch.x < 980)
+		{
+			if (pozycja_myszy_ruch.y > 300 && pozycja_myszy_ruch.y < 380)
+			{
+				start.setScale(1.03, 1.03);
+			}
+		}
+		else start.setScale(1, 1);
+		if (pozycja_myszy_ruch.x > 650 && pozycja_myszy_ruch.x < 980)
+		{
+			if (pozycja_myszy_ruch.y > 400 && pozycja_myszy_ruch.y < 480)
+			{
+				co_to.setScale(1.03, 1.03);
+			}
+		}
+		else co_to.setScale(1, 1);
+		if (pozycja_myszy_ruch.x > 614 && pozycja_myszy_ruch.x < 980)
+		{
+			if (pozycja_myszy_ruch.y > 500 && pozycja_myszy_ruch.y < 580)
+			{
+				wyjscie.setScale(1.03, 1.03);
+			}
+		}
+		else wyjscie.setScale(1, 1);
+		Okno_menu->draw(start);
+		Okno_menu->draw(co_to);
+		Okno_menu->draw(wyjscie);
+		Okno_menu->display();
 	}
 }
 
