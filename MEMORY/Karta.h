@@ -31,6 +31,10 @@ public:
 	{
 		return stan_karty;
 	}
+	int getIndex()
+	{
+		return indeks;
+	}
 	KARTA(int indeks) : indeks(indeks) {};
 	KARTA() {};
 
