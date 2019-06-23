@@ -9,7 +9,7 @@ using namespace sf;
 KARTA PLANSZA::wczytaj_pliki(KARTA karta) 
 {
 	
-		obrazek_zakryta.loadFromFile("zakryta.png");
+	obrazek_zakryta.loadFromFile("zakryta.png");
 	
 	
 	if(karta.indeks==1)
@@ -30,7 +30,7 @@ KARTA PLANSZA::wczytaj_pliki(KARTA karta)
 	}
 	else if(karta.indeks==5)
 	{
-		obrazek_odkryta.loadFromFile("05.png");
+	obrazek_odkryta.loadFromFile("05.png");
 	}
 	else if(karta.indeks==6)
 	{
@@ -49,7 +49,6 @@ KARTA PLANSZA::zaladuj_sprites(KARTA karta)
 		{
 			obrazek.setTexture(obrazek_odkryta);
 		}
-		
 	return karta;
 }
 
@@ -79,10 +78,12 @@ KARTA PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA karta)
 }
 
 
-KARTA PLANSZA::podswietl(KARTA karta,int i)
+KARTA PLANSZA::podswietl(KARTA karta,float i)
 {
-		obrazek.setScale(i, i);
-
+	
+			obrazek.setScale(i, i);
+		
+	
 		return karta;
 }
 
@@ -109,4 +110,10 @@ KARTA PLANSZA::pozycja_sprite(KARTA karta, float x, float y)
 {
 	obrazek.setPosition(x, y);
 	return karta;
+}
+
+bool PLANSZA::czy_to_ta_karta(KARTA karta, Vector2i myszka)
+{
+	if (obrazek.getGlobalBounds().contains(myszka.x, myszka.y)) return true;
+	else return false;
 }

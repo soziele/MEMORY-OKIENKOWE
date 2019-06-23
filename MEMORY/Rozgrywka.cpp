@@ -75,7 +75,7 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 
 void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 {
-	
+
 	KARTA karta1(1);
 	KARTA karta2(1);
 	KARTA karta3(2);
@@ -93,14 +93,13 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 	PLANSZA Plansza;
 
-	Okno_gry->clear();
 	/*
 	sf::Texture cos;
 	cos.loadFromFile("zakryta.png");
 	sf::Sprite nwm;
 	nwm.setTexture(cos);
 	Okno_gry->draw(nwm);
-	
+
 	Plansza.zaladuj_sprites(karta1);
 	Plansza.mieszaj(zestaw);
 	Plansza.rysuj_sprites(Okno_gry, karta1);
@@ -109,118 +108,88 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 	Plansza.mieszaj(zestaw);
 	
-	
+
+
+	float X = 30, Y = 100;
+	for (int i = 0; i < 6; i++)
+	{
+		Plansza.wczytaj_pliki(zestaw[i]);
+		Plansza.zaladuj_sprites(zestaw[i]);
+		Plansza.pozycja_sprite(zestaw[i], X, Y);
+		Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+		X += 160;
+	}
+	Y += 240;
+	X -= 960;
+	for (int i = 6; i < 12; i++)
+	{
+		Plansza.wczytaj_pliki(zestaw[i]);
+		Plansza.zaladuj_sprites(zestaw[i]);
+		Plansza.pozycja_sprite(zestaw[i], X, Y);
+		Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+
+		X += 160;
+	}
+
+
 	while (Okno_gry->isOpen())
 	{
-
-		
-		
-		
-
 		sf::Event zdarzenie;
 
 		while (Okno_gry->pollEvent(zdarzenie))
 		{
-			
+
 			if (zdarzenie.type == sf::Event::Closed)
 			{
 				Okno_gry->close();
 			}
-			/*
-			if (zdarzenie.type == sf::Event::MouseMoved)
-			{
-				sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_gry);
-			}
-			*/
-			
+
+
 			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
 			{
-				/*
-				for (int t = 0; t <12 ; t++)
+
+				sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
+				for (int t = 0; t < 12; t++)
 				{
-					
-					zestaw[t].setStan(zakryta);
-					Plansza.zaladuj_sprites(zestaw[t]);
-					
-					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
-					Okno_gry->clear();
-					Okno_gry->display();
-					
+					if (Plansza.czy_to_ta_karta(zestaw[t], pozycja_myszy_klik) == true)
+					{
+						zestaw[t].setStan(zakryta);
+						Plansza.zaladuj_sprites(zestaw[t]);
+						Okno_gry->clear();
+						Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+
+					}
+					else Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+
 				}
-				*/
+
+
 			}
 
 			sf::Vector2i pozycja_myszy = sf::Mouse::getPosition(*Okno_gry);
-
-			int i = 0, j = 0, X, Y;
-			X = pozycja_myszy.x;
-			Y = pozycja_myszy.y;
-
-			while (i < 6 && j < 2)
+			for (int t = 0; t < 12; t++)
 			{
-				if (X > (30 + (i * 160)) && X < (169 + (i * 160)))
+
+				if (Plansza.czy_to_ta_karta(zestaw[t], pozycja_myszy))
 				{
-					if (Y > (100 + (j * 240)) && Y < (319 + (j * 240)))
-					{
-						Plansza.podswietl(zestaw[i + (6 * j+1)], 2);
-
-						//Instrukcja Podœwietlania kart
-						/*
-						for (int a = 0; a < 12; a++)
-						{
-							int x_owa1 = 30 + (i * 160);
-							int x_owa2 = 169 + (i * 160);
-							int y_owa1 = 100 + (j * 240);
-							int y_owa2 = 319 + (j * 240);
-
-							Plansza.podswietl(zestaw[a], x_owa1, x_owa2, y_owa1, y_owa2);
-
-							Plansza.rysuj_sprites(Okno_gry, zestaw[a]);
-
-
-						}
-						*/
-
-					}
+					Plansza.podswietl(zestaw[t], 1.1);
+					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+					break;
 				}
 				else
 				{
-					Okno_gry->clear();
-					Plansza.podswietl(zestaw[i + (6 * j)+1], 1);
+					Plansza.podswietl(zestaw[t], 1);
+					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
 				}
-
-				if (i == 5)
-				{
-					j++;
-					i = -1;
-				}
-				i++;
 
 
 			}
-		}
 
-		float X = 30, Y = 100;
-		for (int i = 0; i < 6; i++)
-		{
-			Plansza.wczytaj_pliki(zestaw[i]);
-			Plansza.zaladuj_sprites(zestaw[i]);
-			Plansza.pozycja_sprite(zestaw[i], X, Y);
-			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
-			X += 160;
-		}
-		Y += 240;
-		X -= 960;
-		for (int i = 6; i < 12; i++)
-		{
-			Plansza.wczytaj_pliki(zestaw[i]);
-			Plansza.zaladuj_sprites(zestaw[i]);
-			Plansza.pozycja_sprite(zestaw[i], X, Y);
-			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
-
-			X += 160;
-		}
-
+			}
+		
 		Okno_gry->display();
+		}
+	
+
 	}
-}
+	
