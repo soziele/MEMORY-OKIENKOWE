@@ -75,7 +75,7 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 
 void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 {
-	
+
 	KARTA karta1(1);
 	KARTA karta2(1);
 	KARTA karta3(2);
@@ -93,14 +93,13 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 	PLANSZA Plansza;
 
-	Okno_gry->clear();
 	/*
 	sf::Texture cos;
 	cos.loadFromFile("zakryta.png");
 	sf::Sprite nwm;
 	nwm.setTexture(cos);
 	Okno_gry->draw(nwm);
-	
+
 	Plansza.zaladuj_sprites(karta1);
 	Plansza.mieszaj(zestaw);
 	Plansza.rysuj_sprites(Okno_gry, karta1);
@@ -108,6 +107,8 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	*/
 
 	Plansza.mieszaj(zestaw);
+	
+
 
 	float X = 30, Y = 100;
 	for (int i = 0; i < 6; i++)
@@ -130,15 +131,9 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 		X += 160;
 	}
 
-	Okno_gry->display();
 
-	
-	
 	while (Okno_gry->isOpen())
 	{
-
-
-
 		sf::Event zdarzenie;
 
 		while (Okno_gry->pollEvent(zdarzenie))
@@ -160,78 +155,41 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 					{
 						zestaw[t].setStan(zakryta);
 						Plansza.zaladuj_sprites(zestaw[t]);
+						Okno_gry->clear();
 						Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
-						Okno_gry->display();
-						break;
 
 					}
-					else
-					{
-						Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
-						//Okno_gry->display();
-					}
+					else Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
 
 				}
-				
+
 
 			}
 
 			sf::Vector2i pozycja_myszy = sf::Mouse::getPosition(*Okno_gry);
-
-
-			int i = 0, j = 0, X, Y;
-			X = pozycja_myszy.x;
-			Y = pozycja_myszy.y;
-
-			while (i < 6 && j < 2)
+			for (int t = 0; t < 12; t++)
 			{
-				if (X > (30 + (i * 160)) && X < (169 + (i * 160)))
+
+				if (Plansza.czy_to_ta_karta(zestaw[t], pozycja_myszy))
 				{
-					if (Y > (100 + (j * 240)) && Y < (319 + (j * 240)))
-					{
-						for (int t = 0; t < 12; t++)
-						{
-							/*
-							Sprite obrazek = zestaw[t].getObrazek();
-							sf::Vector2f pozycja_obrazka = obrazek.getPosition();
-							if (pozycja_obrazka.x >= 30 + (i * 160) && pozycja_obrazka.x <= 169 + (i * 160))
-							{
-								if (pozycja_obrazka.y >= 100 + (j * 240) && pozycja_obrazka.y <= 319 + (j * 240))
-								{
-									Plansza.podswietl(zestaw[t], 1.1);
-								}
-							}
-							Plansza.zaladuj_sprites(zestaw[t]);
-
-							Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
-							Okno_gry->clear();
-							Okno_gry->display();
-
-						}
-						*/
-						}
-						//Plansza.podswietl(zestaw[i + (6 * j)], 1.1);
-						//Plansza.rysuj_sprites(Okno_gry, zestaw[i+(6*j)]);
-						//Okno_gry->display();
-
-					}
+					Plansza.podswietl(zestaw[t], 1.1);
+					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
+					break;
 				}
 				else
 				{
-
-					Plansza.podswietl(zestaw[i + (6 * j)], 1);
+					Plansza.podswietl(zestaw[t], 1);
+					Plansza.rysuj_sprites(Okno_gry, zestaw[t]);
 				}
-
-				if (i == 5)
-				{
-					j++;
-					i = -1;
-				}
-				i++;
 
 
 			}
+
+			}
+		
+		Okno_gry->display();
 		}
+	
 
 	}
-}
+	

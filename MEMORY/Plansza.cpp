@@ -114,11 +114,6 @@ KARTA PLANSZA::pozycja_sprite(KARTA karta, float x, float y)
 
 bool PLANSZA::czy_to_ta_karta(KARTA karta, Vector2i myszka)
 {
-	float karta_x = obrazek.getPosition().x;
-	float karta_y =obrazek.getPosition().y;
-	if (myszka.x > karta_x && myszka.x < karta_x + 140)
-	{
-		if (myszka.y > karta_y && myszka.y < karta_y + 220) return true;
-	}
+	if (obrazek.getGlobalBounds().contains(myszka.x, myszka.y)) return true;
 	else return false;
 }
