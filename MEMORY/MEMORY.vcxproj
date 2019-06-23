@@ -150,6 +150,9 @@
     <Image Include="wyjscie.png" />
     <Image Include="zakryta.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="HandVetica.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

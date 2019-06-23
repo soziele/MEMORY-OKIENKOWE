@@ -6,54 +6,52 @@
 
 using namespace sf;
 
-KARTA PLANSZA::wczytaj_pliki(KARTA karta) 
+void PLANSZA::wczytaj_pliki(KARTA *karta) 
 {
 	
-	obrazek_zakryta.loadFromFile("zakryta.png");
+	karta->obrazek_zakryta.loadFromFile("zakryta.png");
 	
 	
-	if(karta.indeks==1)
+	if(karta->indeks==1)
 	{
-		obrazek_odkryta.loadFromFile("01.png");
+		karta->obrazek_odkryta.loadFromFile("01.png");
 	}
-	else if(karta.indeks==2)
+	else if(karta->indeks==2)
 	{
-		obrazek_odkryta.loadFromFile("02.png");
+		karta->obrazek_odkryta.loadFromFile("02.png");
 	}
-	else if(karta.indeks==3)
+	else if(karta->indeks==3)
 	{
-		obrazek_odkryta.loadFromFile("03.png");
+		karta->obrazek_odkryta.loadFromFile("03.png");
 	}
-	else if(karta.indeks==4)
+	else if(karta->indeks==4)
 	{
-		obrazek_odkryta.loadFromFile("04.png");
+		karta->obrazek_odkryta.loadFromFile("04.png");
 	}
-	else if(karta.indeks==5)
+	else if(karta->indeks==5)
 	{
-	obrazek_odkryta.loadFromFile("05.png");
+	karta->obrazek_odkryta.loadFromFile("05.png");
 	}
-	else if(karta.indeks==6)
+	else if(karta->indeks==6)
 	{
-		obrazek_odkryta.loadFromFile("06.png");
+		karta->obrazek_odkryta.loadFromFile("06.png");
 	}
-	return karta;
 }
 
-KARTA PLANSZA::zaladuj_sprites(KARTA karta)
+void PLANSZA::zaladuj_sprites(KARTA *karta)
 {
-		if (karta.stan_karty == zakryta)
+		if (karta->stan_karty == zakryta)
 		{
-			obrazek.setTexture(obrazek_zakryta);
+			karta->obrazek.setTexture(karta->obrazek_zakryta);
 		}
-		else if (karta.stan_karty ==odkryta)
+		else if (karta->stan_karty ==odkryta)
 		{
-			obrazek.setTexture(obrazek_odkryta);
+			karta->obrazek.setTexture(karta->obrazek_odkryta);
 		}
-	return karta;
 }
 
 
-KARTA PLANSZA::mieszaj(KARTA zestaw_kart[12])
+void PLANSZA::mieszaj(KARTA zestaw_kart[12])
 {
 	KARTA przechowanie;
 	int x;
@@ -66,25 +64,21 @@ KARTA PLANSZA::mieszaj(KARTA zestaw_kart[12])
 		zestaw_kart[x] = przechowanie;
 		
 	}
-	return *zestaw_kart;
 }
 
 
-KARTA PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA karta)
+void PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA* karta)
 {
-	okno_gry->draw(obrazek);
+	okno_gry->draw(karta->obrazek);
 	
-	return karta;
 }
 
 
-KARTA PLANSZA::podswietl(KARTA karta,float i)
+void PLANSZA::podswietl(KARTA* karta,float i)
 {
 	
-			obrazek.setScale(i, i);
+			karta->obrazek.setScale(i, i);
 		
-	
-		return karta;
 }
 
 
@@ -92,11 +86,11 @@ KARTA PLANSZA::podswietl(KARTA karta,float i)
 /*
 KARTA PLANSZA::podswietl(KARTA karta, int x1, int x2, int y1, int y2)
 {
-	if (obrazek.getPosition().x > x1 && obrazek.getPosition().x < x2)
+	if (karta->obrazek.getPosition().x > x1 && karta->obrazek.getPosition().x < x2)
 	{
-		if (obrazek.getPosition().y > y1 && obrazek.getPosition().y < y2)
+		if (karta->obrazek.getPosition().y > y1 && karta->obrazek.getPosition().y < y2)
 		{
-			obrazek.setScale(2, 2);
+			karta->obrazek.setScale(2, 2);
 		}
 
 	}
@@ -106,14 +100,13 @@ KARTA PLANSZA::podswietl(KARTA karta, int x1, int x2, int y1, int y2)
 
 
 
-KARTA PLANSZA::pozycja_sprite(KARTA karta, float x, float y)
+void PLANSZA::pozycja_sprite(KARTA* karta, float x, float y)
 {
-	obrazek.setPosition(x, y);
-	return karta;
+	karta->obrazek.setPosition(x, y);
 }
 
-bool PLANSZA::czy_to_ta_karta(KARTA karta, Vector2i myszka)
+bool PLANSZA::czy_to_ta_karta(KARTA* karta, Vector2i myszka)
 {
-	if (obrazek.getGlobalBounds().contains(myszka.x, myszka.y)) return true;
-	else return false;
+	if (karta->obrazek.getGlobalBounds().contains(myszka.x, myszka.y)) return true;
+	return false;
 }

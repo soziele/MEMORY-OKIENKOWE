@@ -5,7 +5,39 @@ using namespace sf;
 
 ROZGRYWKA::ROZGRYWKA()
 {
-	
+	KARTA karta1(1);
+	KARTA karta2(1);
+	KARTA karta3(2);
+	KARTA karta4(2);
+	KARTA karta5(3);
+	KARTA karta6(3);
+	KARTA karta7(4);
+	KARTA karta8(4);
+	KARTA karta9(5);
+	KARTA karta10(5);
+	KARTA karta11(6);
+	KARTA karta12(6);
+	/*
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 2; j++) {
+			zestaw[i * 2 + j] = KARTA(i);
+		}
+	}
+	*/
+	zestaw[0] = karta1;
+	zestaw[1] = karta2;
+	zestaw[2] = karta3;
+	zestaw[3] = karta4;
+	zestaw[4] = karta5;
+	zestaw[5] = karta6;
+	zestaw[6] = karta7;
+	zestaw[7] = karta8;
+	zestaw[8] = karta9;
+	zestaw[9] = karta10;
+	zestaw[10] = karta11;
+	zestaw[11] = karta12;
+	//zestaw = { karta1,karta2,karta3,karta4,karta5,karta6,karta7,karta8,karta9,karta10,karta11,karta12 };
+
 }
 
 void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
@@ -56,7 +88,13 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 						sf::RenderWindow Okno_info(sf::VideoMode(800, 400, 32), "MEMORY", sf::Style::Close);
 						while (Okno_info.isOpen())
 						{
-
+							sf::Text tekst;
+							sf::Font font;
+							font.loadFromFile("HandVetica.ttf");
+							tekst.setString("Jest to gra o odkrywaniu kart. Gracz wygrywa w momencie, gry odnajdzie wszystkie zakryte pary.");
+							tekst.setFont(font);
+							Okno_info.draw(tekst);
+							Okno_info.display();
 						}
 					}
 				}
@@ -76,63 +114,35 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 {
 
-	KARTA karta1(1);
-	KARTA karta2(1);
-	KARTA karta3(2);
-	KARTA karta4(2);
-	KARTA karta5(3);
-	KARTA karta6(3);
-	KARTA karta7(4);
-	KARTA karta8(4);
-	KARTA karta9(5);
-	KARTA karta10(5);
-	KARTA karta11(6);
-	KARTA karta12(6);
-
-	KARTA zestaw[12] = { karta1,karta2,karta3,karta4,karta5,karta6,karta7,karta8,karta9,karta10,karta11,karta12 };
 
 	PLANSZA Plansza;
-
-	/*
-	sf::Texture cos;
-	cos.loadFromFile("zakryta.png");
-	sf::Sprite nwm;
-	nwm.setTexture(cos);
-	Okno_gry->draw(nwm);
-
-	Plansza.zaladuj_sprites(karta1);
-	Plansza.mieszaj(zestaw);
-	Plansza.rysuj_sprites(Okno_gry, karta1);
-	Okno_gry->display();
-	*/
-
-	Plansza.mieszaj(zestaw);
 	
 
 
+	Plansza.mieszaj(zestaw);
 	
+	
+
 
 
 	while (Okno_gry->isOpen())
 	{
-		Okno_gry->clear();
+
 		float X = 30, Y = 100;
 		for (int i = 0; i < 6; i++)
 		{
-			Plansza.wczytaj_pliki(zestaw[i]);
-			Plansza.zaladuj_sprites(zestaw[i]);
-			Plansza.pozycja_sprite(zestaw[i], X, Y);
-			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+			Plansza.wczytaj_pliki(&zestaw[i]);
+			Plansza.zaladuj_sprites(&zestaw[i]);
+			Plansza.pozycja_sprite(&zestaw[i], X, Y);
 			X += 160;
 		}
 		Y += 240;
 		X -= 960;
 		for (int i = 6; i < 12; i++)
 		{
-			Plansza.wczytaj_pliki(zestaw[i]);
-			Plansza.zaladuj_sprites(zestaw[i]);
-			Plansza.pozycja_sprite(zestaw[i], X, Y);
-			Plansza.rysuj_sprites(Okno_gry, zestaw[i]);
+			Plansza.wczytaj_pliki(&zestaw[i]);
+			Plansza.zaladuj_sprites(&zestaw[i]);
+			Plansza.pozycja_sprite(&zestaw[i], X, Y);
 
 			X += 160;
 		}
@@ -142,7 +152,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 		while (Okno_gry->pollEvent(zdarzenie))
 		{
-
+			
 			if (zdarzenie.type == sf::Event::Closed)
 			{
 				Okno_gry->close();
@@ -155,17 +165,17 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
 				for (int t = 0; t < 12; t++)
 				{
-					if (Plansza.czy_to_ta_karta(zestaw[t], pozycja_myszy_klik) == true)
+					if (Plansza.czy_to_ta_karta(&zestaw[t], pozycja_myszy_klik))
 					{
+						if(zestaw[t].getStan()==odkryta)
 						zestaw[t].setStan(zakryta);
-						Plansza.zaladuj_sprites(zestaw[t]);
-
+						else if(zestaw[t].getStan() == zakryta)
+						zestaw[t].setStan(odkryta);
+						Plansza.zaladuj_sprites(&zestaw[t]);
+						
 					}
-
-
+					
 				}
-
-
 
 			}
 
@@ -174,27 +184,29 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 			for (int t = 0; t < 12; t++)
 			{
 
-				if (Plansza.czy_to_ta_karta(zestaw[t], pozycja_myszy))
+				if (Plansza.czy_to_ta_karta(&zestaw[t], pozycja_myszy))
 				{
-					Plansza.podswietl(zestaw[t], 1.1);
-					
-					break;
+					Plansza.podswietl(&zestaw[t], 1.1);
 				}
 				else
 				{
-					Plansza.podswietl(zestaw[t], 1);
-					
+					Plansza.podswietl(&zestaw[t], 1);
 				}
-
-
 			}
-			
-			Okno_gry->display();
-		}
-		
-		
-		}
-	
 
+		}
+		rysuj_wszystko(Okno_gry);
+		}
+
+	}
+
+	void ROZGRYWKA::rysuj_wszystko(RenderWindow*Okno_gry)
+	{
+		Okno_gry->clear();
+		for (int i = 0; i < 12; i++)
+		{
+			Okno_gry->draw(zestaw[i].getSprite());
+		}
+		Okno_gry->display();
 	}
 	

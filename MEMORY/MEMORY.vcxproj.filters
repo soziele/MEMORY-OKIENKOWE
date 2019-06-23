@@ -80,4 +80,9 @@
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="HandVetica.ttf">
+      <Filter>Pliki zasobów</Filter>
+    </Font>
+  </ItemGroup>
 </Project>

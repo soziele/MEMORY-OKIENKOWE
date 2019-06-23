@@ -8,13 +8,13 @@ class PLANSZA:public KARTA
 {
 
 public:
-	bool czy_to_ta_karta(KARTA, Vector2i);
-	KARTA pozycja_sprite(KARTA, float, float);
-	KARTA wczytaj_pliki(KARTA);
-	KARTA zaladuj_sprites(KARTA);
-	KARTA mieszaj(KARTA[12]);
-	KARTA rysuj_sprites(sf::RenderWindow*, KARTA);
-	KARTA podswietl(KARTA,float);
+	bool czy_to_ta_karta(KARTA*, Vector2i);
+	void pozycja_sprite(KARTA*, float, float);
+	void wczytaj_pliki(KARTA*);
+	void zaladuj_sprites(KARTA*);
+	void mieszaj(KARTA[12]);
+	void rysuj_sprites(sf::RenderWindow*, KARTA*);
+	void podswietl(KARTA*,float);
 	
 	PLANSZA() {};
 };
