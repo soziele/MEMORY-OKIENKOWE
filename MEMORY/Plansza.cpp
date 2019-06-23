@@ -78,6 +78,17 @@ KARTA PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA karta)
 	return karta;
 }
 
+
+KARTA PLANSZA::podswietl(KARTA karta,int i)
+{
+		obrazek.setScale(i, i);
+
+		return karta;
+}
+
+
+
+/*
 KARTA PLANSZA::podswietl(KARTA karta, int x1, int x2, int y1, int y2)
 {
 	if (obrazek.getPosition().x > x1 && obrazek.getPosition().x < x2)
@@ -90,6 +101,9 @@ KARTA PLANSZA::podswietl(KARTA karta, int x1, int x2, int y1, int y2)
 	}
 	return karta;
 }
+*/
+
+
 
 KARTA PLANSZA::pozycja_sprite(KARTA karta, float x, float y)
 {
