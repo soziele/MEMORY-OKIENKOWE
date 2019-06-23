@@ -13,6 +13,6 @@ public:
 	KARTA zaladuj_sprites(KARTA);
 	KARTA mieszaj(KARTA[12]);
 	KARTA rysuj_sprites(sf::RenderWindow*, KARTA);
-	KARTA podswietl(KARTA, int, int, int, int);
+	KARTA podswietl(KARTA,int);
 	PLANSZA() {};
 };
