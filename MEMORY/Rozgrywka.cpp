@@ -1,11 +1,75 @@
 #include"Rozgrywka.h"
 #include<fstream>
-
+#include<stdlib.h>
 using namespace sf;
 
 ROZGRYWKA::ROZGRYWKA()
 {
 	
+}
+
+void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
+{
+	sf::Texture Tex_start;
+	sf::Texture Tex_co_to;
+	sf::Texture Tex_wyjscie;
+
+	sf::Sprite start;
+	sf::Sprite co_to;
+	sf::Sprite wyjscie;
+
+	Tex_start.loadFromFile("start.png");
+	Tex_co_to.loadFromFile("co_to.png");
+	Tex_wyjscie.loadFromFile("wyjscie.png");
+
+	start.setTexture(Tex_start);
+	co_to.setTexture(Tex_co_to);
+	wyjscie.setTexture(Tex_wyjscie);
+	start.setPosition(685, 300);
+	co_to.setPosition(650, 400);
+	wyjscie.setPosition(614, 500);
+	while (Okno_menu->isOpen())
+	{
+		Okno_menu->draw(start);
+		Okno_menu->draw(co_to);
+		Okno_menu->draw(wyjscie);
+		Okno_menu->display();
+
+		sf::Event zdarzenie;
+		while (Okno_menu->pollEvent(zdarzenie))
+		{
+
+			if (zdarzenie.type == sf::Event::MouseButtonPressed && zdarzenie.mouseButton.button == sf::Mouse::Left)
+			{
+				sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_menu);
+				if (pozycja_myszy_klik.x > 685 && pozycja_myszy_klik.x < 980)
+				{
+					if (pozycja_myszy_klik.y > 300 && pozycja_myszy_klik.y < 380)
+					{
+						Okno_menu->close();
+					}
+				}
+				if (pozycja_myszy_klik.x > 650 && pozycja_myszy_klik.x < 980)
+				{
+					if (pozycja_myszy_klik.y > 400 && pozycja_myszy_klik.y < 480)
+					{
+						sf::RenderWindow Okno_info(sf::VideoMode(800, 400, 32), "MEMORY", sf::Style::Close);
+						while (Okno_info.isOpen())
+						{
+
+						}
+					}
+				}
+				if (pozycja_myszy_klik.x > 614 && pozycja_myszy_klik.x < 980)
+				{
+					if (pozycja_myszy_klik.y > 500 && pozycja_myszy_klik.y < 580)
+					{
+						exit(EXIT_FAILURE);
+					}
+				}
+			}
+		}
+	}
 }
 
 
@@ -94,7 +158,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				sf::Vector2i pozycja_myszy_klik = sf::Mouse::getPosition(*Okno_gry);
 				for (int t = 0; t <12 ; t++)
 				{
-					if()
+					
 					zestaw[t].setStan(zakryta);
 					Plansza.zaladuj_sprites(zestaw[t]);
 					

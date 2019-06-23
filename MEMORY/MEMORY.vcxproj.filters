@@ -70,5 +70,14 @@
     <Image Include="06.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="co_to.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="start.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="wyjscie.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
 </Project>

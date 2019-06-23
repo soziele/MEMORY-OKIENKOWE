@@ -141,10 +141,13 @@
     <Image Include="04.png" />
     <Image Include="05.png" />
     <Image Include="06.png" />
+    <Image Include="co_to.png" />
     <Image Include="img\zakryta.png">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </Image>
+    <Image Include="start.png" />
+    <Image Include="wyjscie.png" />
     <Image Include="zakryta.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

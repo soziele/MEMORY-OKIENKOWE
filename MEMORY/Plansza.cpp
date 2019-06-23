@@ -6,7 +6,7 @@
 
 using namespace sf;
 
-KARTA PLANSZA::wczytaj_pliki(KARTA karta)
+KARTA PLANSZA::wczytaj_pliki(KARTA karta) 
 {
 	
 		obrazek_zakryta.loadFromFile("zakryta.png");
