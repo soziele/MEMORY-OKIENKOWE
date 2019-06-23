@@ -92,9 +92,15 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 							sf::Text tekst;
 							sf::Font font;
 							font.loadFromFile("HandVetica.ttf");
-							tekst.setString("Jest to gra o odkrywaniu kart. Gracz wygrywa w momencie, gry odnajdzie wszystkie zakryte pary.");
+							tekst.setString("Niniejsza aplikacja to gra polegajaca na \nodnajdywaniu par w zestawie zakrytych kart. \nKazda proba polaczenia kart w pare to jedna tura gracza. \nGra konczy sie w momencie, gdy wszystkie karty \nznikna z planszy. Powodzenia!");
 							tekst.setFont(font);
 							Okno_info.draw(tekst);
+							Event event;
+							while (Okno_info.pollEvent(zdarzenie))
+								if (zdarzenie.type == sf::Event::Closed)
+								{
+									Okno_info.close();
+								}
 							Okno_info.display();
 						}
 					}
