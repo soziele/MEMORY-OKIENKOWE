@@ -1,6 +1,7 @@
 #include"Rozgrywka.h"
 #include<fstream>
 #include<stdlib.h>
+#include<iostream>
 using namespace sf;
 
 ROZGRYWKA::ROZGRYWKA()
@@ -62,11 +63,10 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 	wyjscie.setPosition(614, 500);
 	while (Okno_menu->isOpen())
 	{
-		Okno_menu->clear();
 		Okno_menu->draw(start);
 		Okno_menu->draw(co_to);
 		Okno_menu->draw(wyjscie);
-		
+		Okno_menu->display();
 
 		sf::Event zdarzenie;
 		while (Okno_menu->pollEvent(zdarzenie))
@@ -114,40 +114,8 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 				}
 			}
 		}
-		sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_menu);
-		if (pozycja_myszy_ruch.x > 685 && pozycja_myszy_ruch.x < 980)
-		{
-			if (pozycja_myszy_ruch.y > 300 && pozycja_myszy_ruch.y < 380)
-			{
-				start.setScale(1.03, 1.03);
-			}
-		}
-		else start.setScale(1, 1);
-		if (pozycja_myszy_ruch.x > 650 && pozycja_myszy_ruch.x < 980)
-		{
-			if (pozycja_myszy_ruch.y > 400 && pozycja_myszy_ruch.y < 480)
-			{
-				co_to.setScale(1.03, 1.03);
-			}
-		}
-		else co_to.setScale(1, 1);
-		if (pozycja_myszy_ruch.x > 614 && pozycja_myszy_ruch.x < 980)
-		{
-			if (pozycja_myszy_ruch.y > 500 && pozycja_myszy_ruch.y < 580)
-			{
-				wyjscie.setScale(1.03, 1.03);
-			}
-		}
-		else wyjscie.setScale(1, 1);
-		Okno_menu->draw(start);
-		Okno_menu->draw(co_to);
-		Okno_menu->draw(wyjscie);
-		Okno_menu->display();
 	}
-	
 }
-
-
 
 
 void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
@@ -166,7 +134,6 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 	while (Okno_gry->isOpen())
 	{
-		int k1 = 0, k2 = 0, dwa = 0;
 		float X = 30, Y = 100;
 		for (int i = 0; i < 6; i++)
 		{
@@ -206,13 +173,84 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				{
 					if (Plansza.czy_to_ta_karta(&zestaw[t], pozycja_myszy_klik))
 					{
-						if(zestaw[t].getStan()==odkryta)
-						zestaw[t].setStan(zakryta);
-						else if(zestaw[t].getStan() == zakryta)
+						
+						if(zestaw[t].getStan() == zakryta)
 						zestaw[t].setStan(odkryta);
 						Plansza.zaladuj_sprites(&zestaw[t]);
 						
+						for (int u = 0; u < 12; u++)
+						{
+							if (u == t)
+							{
+								u++;
+							}
+							
+							if (zestaw[u].getStan() == odkryta)
+							{
+								
+								if (zestaw[u].getIndex() == zestaw[t].getIndex())
+								{
+									zestaw[u].setStan(usunieta);
+									zestaw[t].setStan(usunieta);
+								}
+								else
+								{
+									rysuj_wszystko(Okno_gry);
+									sleep(time);
+									zestaw[u].setStan(zakryta);
+									zestaw[t].setStan(zakryta);
+									
+								}
+							}
+							
+						}
 					}
+					/*
+					for (int t = 0; t < 12; t++)
+					{
+						if (dwa != 2)
+						{
+							if (zestaw[t].getStan() == odkryta)
+							{
+								dwa++;
+
+								if (k1 == 0)
+								{
+									k1 = t;
+								}
+								else
+								{
+									k2 = t;
+								}
+							}
+						}
+						else if (zestaw[k1].getIndex() == zestaw[k2].getIndex())
+						{
+							zestaw[k1].setStan(usunieta);
+							zestaw[k2].setStan(usunieta);
+
+							dwa = 0;
+							k1 = 0;
+							k2 = 0;
+
+						}
+						else
+						{
+							Plansza.podswietl(&zestaw[k2], 1);
+							rysuj_wszystko(Okno_gry);
+							sleep(time);
+							zestaw[k1].setStan(zakryta);
+							zestaw[k2].setStan(zakryta);
+
+							dwa = 0;
+							k1 = 0;
+							k2 = 0;
+							break;
+
+						}
+
+					}
+					*/
 					
 				}
 
@@ -234,40 +272,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				}
 			}
 
-			for (int t = 0; t < 12; t++)
-			{
-				if (dwa != 2)
-				{
-					if (zestaw[t].getStan() == odkryta)
-					{
-						dwa++;
-
-						if (k1 == 0)
-						{
-							k1 = t;
-						}
-						else
-						{
-							k2 = t;
-						}
-					}
-				}
-				else
-				{
-					Plansza.podswietl(&zestaw[k2], 1);
-					rysuj_wszystko(Okno_gry);
-					sleep(time);
-					zestaw[k1].setStan(zakryta);
-					zestaw[k2].setStan(zakryta);
-					
-					dwa = 0;
-					k1 = 0;
-					k2 = 0;
-
-					
-				}
-				
-			}
+			
 
 
 
