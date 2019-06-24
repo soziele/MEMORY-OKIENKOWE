@@ -116,28 +116,21 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 			}
 		}
 		sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_menu);
-		if (pozycja_myszy_ruch.x > 685 && pozycja_myszy_ruch.x < 980)
+		if (pozycja_myszy_ruch.x > 685 && pozycja_myszy_ruch.x < 980 && pozycja_myszy_ruch.y > 300 && pozycja_myszy_ruch.y < 380)
 		{
-			if (pozycja_myszy_ruch.y > 300 && pozycja_myszy_ruch.y < 380)
-			{
-				start.setScale(1.05, 1.05);
-			}
+			start.setScale(1.05, 1.05);
 		}
 		else start.setScale(1, 1);
-		if (pozycja_myszy_ruch.x > 650 && pozycja_myszy_ruch.x < 980)
+
+		if (pozycja_myszy_ruch.x > 650 && pozycja_myszy_ruch.x < 980 && pozycja_myszy_ruch.y > 400 && pozycja_myszy_ruch.y < 480)
 		{
-			if (pozycja_myszy_ruch.y > 400 && pozycja_myszy_ruch.y < 480)
-			{
-				co_to.setScale(1.05, 1.05);
-			}
+			co_to.setScale(1.05, 1.05);	
 		}
 		else co_to.setScale(1, 1);
-		if (pozycja_myszy_ruch.x > 614 && pozycja_myszy_ruch.x < 980)
+
+		if (pozycja_myszy_ruch.x > 614 && pozycja_myszy_ruch.x < 980 && pozycja_myszy_ruch.y > 500 && pozycja_myszy_ruch.y < 580)
 		{
-			if (pozycja_myszy_ruch.y > 500 && pozycja_myszy_ruch.y < 580)
-			{
-				wyjscie.setScale(1.05, 1.05);
-			}
+			wyjscie.setScale(1.05, 1.05);
 		}
 		else wyjscie.setScale(1, 1);
 		Okno_menu->draw(start);
