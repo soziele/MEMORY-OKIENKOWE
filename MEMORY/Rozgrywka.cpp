@@ -63,10 +63,11 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 	wyjscie.setPosition(614, 500);
 	while (Okno_menu->isOpen())
 	{
+		Okno_menu->clear();
 		Okno_menu->draw(start);
 		Okno_menu->draw(co_to);
 		Okno_menu->draw(wyjscie);
-		Okno_menu->display();
+		
 
 		sf::Event zdarzenie;
 		while (Okno_menu->pollEvent(zdarzenie))
@@ -114,8 +115,40 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 				}
 			}
 		}
+		sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_menu);
+		if (pozycja_myszy_ruch.x > 685 && pozycja_myszy_ruch.x < 980)
+		{
+			if (pozycja_myszy_ruch.y > 300 && pozycja_myszy_ruch.y < 380)
+			{
+				start.setScale(1.05, 1.05);
+			}
+		}
+		else start.setScale(1, 1);
+		if (pozycja_myszy_ruch.x > 650 && pozycja_myszy_ruch.x < 980)
+		{
+			if (pozycja_myszy_ruch.y > 400 && pozycja_myszy_ruch.y < 480)
+			{
+				co_to.setScale(1.05, 1.05);
+			}
+		}
+		else co_to.setScale(1, 1);
+		if (pozycja_myszy_ruch.x > 614 && pozycja_myszy_ruch.x < 980)
+		{
+			if (pozycja_myszy_ruch.y > 500 && pozycja_myszy_ruch.y < 580)
+			{
+				wyjscie.setScale(1.05, 1.05);
+			}
+		}
+		else wyjscie.setScale(1, 1);
+		Okno_menu->draw(start);
+		Okno_menu->draw(co_to);
+		Okno_menu->draw(wyjscie);
+		Okno_menu->display();
 	}
 }
+
+
+
 
 
 void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
@@ -129,7 +162,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	Plansza.mieszaj(zestaw);
 	
 	
-
+	int liczba_tur;
 
 
 	while (Okno_gry->isOpen())
@@ -187,7 +220,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 							
 							if (zestaw[u].getStan() == odkryta)
 							{
-								
+								//liczba_tur++;
 								if (zestaw[u].getIndex() == zestaw[t].getIndex())
 								{
 									zestaw[u].setStan(usunieta);
@@ -275,7 +308,10 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 			
 
 
-
+			if (zestaw[0].getStan() == usunieta && zestaw[1].getStan() == usunieta && zestaw[2].getStan() == usunieta && zestaw[3].getStan() == usunieta && zestaw[4].getStan() == usunieta && zestaw[5].getStan() == usunieta && zestaw[6].getStan() == usunieta && zestaw[7].getStan() == usunieta && zestaw[8].getStan() == usunieta && zestaw[9].getStan() == usunieta && zestaw[10].getStan() == usunieta && zestaw[11].getStan() == usunieta)
+			{
+				Okno_gry->close();
+			}
 
 
 		}
