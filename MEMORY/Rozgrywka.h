@@ -9,11 +9,16 @@ private:
 	int liczba_tur=0;
 	void rysuj_wszystko(RenderWindow*);
 	KARTA zestaw[12];
-
+	
 public:
 
 	void menu(sf::RenderWindow*);
 	void aktualizuj(sf::RenderWindow*);
-	
+
+
+
+
+
+
 	ROZGRYWKA();
 };

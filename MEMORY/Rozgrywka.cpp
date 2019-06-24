@@ -4,6 +4,7 @@
 #include<iostream>
 #include <string>
 using namespace sf;
+//int kolor=0;
 
 ROZGRYWKA::ROZGRYWKA()
 {
@@ -39,7 +40,7 @@ ROZGRYWKA::ROZGRYWKA()
 	zestaw[10] = karta11;
 	zestaw[11] = karta12;
 	//zestaw = { karta1,karta2,karta3,karta4,karta5,karta6,karta7,karta8,karta9,karta10,karta11,karta12 };
-
+	
 }
 
 void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
@@ -48,24 +49,53 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 	sf::Texture Tex_co_to;
 	sf::Texture Tex_wyjscie;
 	sf::Texture Tex_tlo;
+	//----------------------------
+	//sf::Texture Tex_kolo1;
+	//sf::Texture Tex_kolo2;
+	//sf::Texture Tex_kolo3;
+
 
 	sf::Sprite start;
 	sf::Sprite co_to;
 	sf::Sprite wyjscie;
 	sf::Sprite tlo;
+	//----------------------------
+	//sf::Sprite kolo1;
+	//sf::Sprite kolo2;
+	//sf::Sprite kolo3;
+
+
+
 
 	Tex_start.loadFromFile("start.png");
 	Tex_co_to.loadFromFile("co_to.png");
 	Tex_wyjscie.loadFromFile("wyjscie.png");
 	Tex_tlo.loadFromFile("tlo_menu.png");
+	//---------------------------------------
+	//Tex_kolo1.loadFromFile("");
+	//Tex_kolo2.loadFromFile("");
+	//Tex_kolo3.loadFromFile("");
+
+
 
 	start.setTexture(Tex_start);
 	co_to.setTexture(Tex_co_to);
 	wyjscie.setTexture(Tex_wyjscie);
 	tlo.setTexture(Tex_tlo);
+	//---------------------------------
+	//kolo1.setTexture(Tex_kolo1);
+	//kolo2.setTexture(Tex_kolo2);
+	//kolo3.setTexture(Tex_kolo3);
+
+
 	start.setPosition(685, 300);
 	co_to.setPosition(650, 400);
 	wyjscie.setPosition(614, 500);
+	//-------------------------------------
+	//kolo1.setPosition(41, 342);
+	//kolo2.setPosition(191, 342);
+	//kolo3.setPosition(341, 342);
+
 	while (Okno_menu->isOpen())
 	{
 		Okno_menu->clear();
@@ -104,7 +134,7 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 							tekst.setFont(font);
 							tekst.setCharacterSize(30);
 							Okno_info.draw(tekst);
-							Event event;
+							//Event event;
 							while (Okno_info.pollEvent(zdarzenie))
 								if (zdarzenie.type == sf::Event::Closed)
 								{
@@ -121,26 +151,68 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 						exit(EXIT_FAILURE);
 					}
 				}
+			
+
+				/*
+
+
+				if (pozycja_myszy_klik.x > 41 && pozycja_myszy_klik.x < 170 && pozycja_myszy_klik.y > 342 && pozycja_myszy_klik.y < 551)
+					kolor = 0;
+			
+			
+				if (pozycja_myszy_klik.x > 191 && pozycja_myszy_klik.x < 320 && pozycja_myszy_klik.y > 342 && pozycja_myszy_klik.y < 551)
+					kolor = 1;
+
+
+				if (pozycja_myszy_klik.x > 341 && pozycja_myszy_klik.x < 470 && pozycja_myszy_klik.y > 342 && pozycja_myszy_klik.y < 551)
+					kolor = 2;
+				
+				*/
 			}
 		}
 		sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_menu);
 		if (pozycja_myszy_ruch.x > 685 && pozycja_myszy_ruch.x < 980 && pozycja_myszy_ruch.y > 300 && pozycja_myszy_ruch.y < 380)
 		{
-			start.setScale(1.03, 1.03);
+			start.setScale(1.03f, 1.03f);
 		}
 		else start.setScale(1, 1);
 
 		if (pozycja_myszy_ruch.x > 650 && pozycja_myszy_ruch.x < 980 && pozycja_myszy_ruch.y > 400 && pozycja_myszy_ruch.y < 480)
 		{
-			co_to.setScale(1.03, 1.03);	
+			co_to.setScale(1.03f, 1.03f);	
 		}
 		else co_to.setScale(1, 1);
 
 		if (pozycja_myszy_ruch.x > 614 && pozycja_myszy_ruch.x < 980 && pozycja_myszy_ruch.y > 500 && pozycja_myszy_ruch.y < 580)
 		{
-			wyjscie.setScale(1.03, 1.03);
+			wyjscie.setScale(1.03f, 1.03f);
 		}
 		else wyjscie.setScale(1, 1);
+
+
+
+
+		/*
+
+		if (pozycja_myszy_ruch.x > 41 && pozycja_myszy_ruch.x < 170 && pozycja_myszy_ruch.y > 342 && pozycja_myszy_ruch.y < 551)
+		{
+			kolo1.setScale(1.03, 1.03);
+		}
+
+		if (pozycja_myszy_ruch.x > 191 && pozycja_myszy_ruch.x < 320 && pozycja_myszy_ruch.y > 342 && pozycja_myszy_ruch.y < 551)
+		{
+			kolo2.setScale(1.03, 1.03);
+		}
+
+
+		if (pozycja_myszy_ruch.x > 341 && pozycja_myszy_ruch.x < 470 && pozycja_myszy_ruch.y > 342 && pozycja_myszy_ruch.y < 551)
+		{
+			kolo3.setScale(1.03, 1.03);
+		}
+		*/
+
+
+
 		Okno_menu->draw(start);
 		Okno_menu->draw(co_to);
 		Okno_menu->draw(wyjscie);
@@ -186,7 +258,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 			X += 160;
 		}
-		sf:Time time = sf::seconds(1);
+		sf::Time time = sf::seconds(1);
 
 		sf::Event zdarzenie;
 
@@ -298,7 +370,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 				if (Plansza.czy_to_ta_karta(&zestaw[t], pozycja_myszy))
 				{
-					Plansza.podswietl(&zestaw[t], 1.025);
+					Plansza.podswietl(&zestaw[t], 1.025f);
 				}
 				else
 				{
@@ -324,7 +396,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 					tekst.setFont(font);
 					Okno_gry->draw(tekst);
 					Okno_gry->display();
-					Event event;
+					//Event event;
 					while (Okno_gry->pollEvent(zdarzenie))
 						if (zdarzenie.type == sf::Event::Closed)
 						{
