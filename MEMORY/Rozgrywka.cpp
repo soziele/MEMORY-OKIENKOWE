@@ -128,7 +128,6 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 	while (Okno_gry->isOpen())
 	{
-		int k1 = 0, k2 = 0, dwa = 0;
 		float X = 30, Y = 100;
 		for (int i = 0; i < 6; i++)
 		{
@@ -168,13 +167,39 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 				{
 					if (Plansza.czy_to_ta_karta(&zestaw[t], pozycja_myszy_klik))
 					{
-						if(zestaw[t].getStan()==odkryta)
-						zestaw[t].setStan(zakryta);
-						else if(zestaw[t].getStan() == zakryta)
+						
+						if(zestaw[t].getStan() == zakryta)
 						zestaw[t].setStan(odkryta);
 						Plansza.zaladuj_sprites(&zestaw[t]);
 						
+						for (int u = 0; u < 12; u++)
+						{
+							if (u == t)
+							{
+								u++;
+							}
+							
+							if (zestaw[u].getStan() == odkryta)
+							{
+								
+								if (zestaw[u].getIndex() == zestaw[t].getIndex())
+								{
+									zestaw[u].setStan(usunieta);
+									zestaw[t].setStan(usunieta);
+								}
+								else
+								{
+									rysuj_wszystko(Okno_gry);
+									sleep(time);
+									zestaw[u].setStan(zakryta);
+									zestaw[t].setStan(zakryta);
+									
+								}
+							}
+							
+						}
 					}
+					/*
 					for (int t = 0; t < 12; t++)
 					{
 						if (dwa != 2)
@@ -219,6 +244,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 						}
 
 					}
+					*/
 					
 				}
 
