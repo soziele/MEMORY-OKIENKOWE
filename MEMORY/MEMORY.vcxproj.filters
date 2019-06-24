@@ -79,9 +79,15 @@
     <Image Include="wyjscie.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
+    <Image Include="tlo_menu.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="tlo_gra.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="HandVetica.ttf">
+    <Font Include="PressStart.ttf">
       <Filter>Pliki zasobów</Filter>
     </Font>
   </ItemGroup>

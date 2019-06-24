@@ -6,6 +6,7 @@
 class ROZGRYWKA
 {
 private:
+	int liczba_tur=0;
 	void rysuj_wszystko(RenderWindow*);
 	KARTA zestaw[12];
 

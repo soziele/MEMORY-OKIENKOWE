@@ -2,6 +2,7 @@
 #include<fstream>
 #include<stdlib.h>
 #include<iostream>
+#include <string>
 using namespace sf;
 
 ROZGRYWKA::ROZGRYWKA()
@@ -46,27 +47,33 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 	sf::Texture Tex_start;
 	sf::Texture Tex_co_to;
 	sf::Texture Tex_wyjscie;
+	sf::Texture Tex_tlo;
 
 	sf::Sprite start;
 	sf::Sprite co_to;
 	sf::Sprite wyjscie;
+	sf::Sprite tlo;
 
 	Tex_start.loadFromFile("start.png");
 	Tex_co_to.loadFromFile("co_to.png");
 	Tex_wyjscie.loadFromFile("wyjscie.png");
+	Tex_tlo.loadFromFile("tlo_menu.png");
 
 	start.setTexture(Tex_start);
 	co_to.setTexture(Tex_co_to);
 	wyjscie.setTexture(Tex_wyjscie);
+	tlo.setTexture(Tex_tlo);
 	start.setPosition(685, 300);
 	co_to.setPosition(650, 400);
 	wyjscie.setPosition(614, 500);
 	while (Okno_menu->isOpen())
 	{
 		Okno_menu->clear();
+		Okno_menu->draw(tlo);
 		Okno_menu->draw(start);
 		Okno_menu->draw(co_to);
 		Okno_menu->draw(wyjscie);
+	
 		
 
 		sf::Event zdarzenie;
@@ -87,14 +94,15 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 				{
 					if (pozycja_myszy_klik.y > 400 && pozycja_myszy_klik.y < 480)
 					{
-						sf::RenderWindow Okno_info(sf::VideoMode(800, 400, 32), "MEMORY", sf::Style::Close);
+						sf::RenderWindow Okno_info(sf::VideoMode(1000, 400, 32), "MEMORY", sf::Style::Close);
 						while (Okno_info.isOpen())
 						{
 							sf::Text tekst;
 							sf::Font font;
-							font.loadFromFile("HandVetica.ttf");
-							tekst.setString("Niniejsza aplikacja to gra polegajaca na \nodnajdywaniu par w zestawie zakrytych kart. \nKazda proba polaczenia kart w pare to jedna tura gracza. \nGra konczy sie w momencie, gdy wszystkie karty \nznikna z planszy. Powodzenia!");
+							font.loadFromFile("PressStart.ttf");
+							tekst.setString("\nNiniejsza aplikacja to gra \npolegajaca na odnajdywaniu par \nw zestawie zakrytych kart. \nKazda proba polaczenia kart \nw pare to jedna tura gracza. \nGra konczy sie w momencie, gdy \nwszystkie karty beda odkryte. \nPowodzenia!");
 							tekst.setFont(font);
+							tekst.setCharacterSize(30);
 							Okno_info.draw(tekst);
 							Event event;
 							while (Okno_info.pollEvent(zdarzenie))
@@ -118,19 +126,19 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 		sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_menu);
 		if (pozycja_myszy_ruch.x > 685 && pozycja_myszy_ruch.x < 980 && pozycja_myszy_ruch.y > 300 && pozycja_myszy_ruch.y < 380)
 		{
-			start.setScale(1.05, 1.05);
+			start.setScale(1.03, 1.03);
 		}
 		else start.setScale(1, 1);
 
 		if (pozycja_myszy_ruch.x > 650 && pozycja_myszy_ruch.x < 980 && pozycja_myszy_ruch.y > 400 && pozycja_myszy_ruch.y < 480)
 		{
-			co_to.setScale(1.05, 1.05);	
+			co_to.setScale(1.03, 1.03);	
 		}
 		else co_to.setScale(1, 1);
 
 		if (pozycja_myszy_ruch.x > 614 && pozycja_myszy_ruch.x < 980 && pozycja_myszy_ruch.y > 500 && pozycja_myszy_ruch.y < 580)
 		{
-			wyjscie.setScale(1.05, 1.05);
+			wyjscie.setScale(1.03, 1.03);
 		}
 		else wyjscie.setScale(1, 1);
 		Okno_menu->draw(start);
@@ -155,7 +163,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	Plansza.mieszaj(zestaw);
 	
 	
-	int liczba_tur;
+	
 
 
 	while (Okno_gry->isOpen())
@@ -213,7 +221,7 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 							
 							if (zestaw[u].getStan() == odkryta)
 							{
-								//liczba_tur++;
+								liczba_tur++;
 								if (zestaw[u].getIndex() == zestaw[t].getIndex())
 								{
 									zestaw[u].setStan(usunieta);
@@ -303,9 +311,29 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 			if (zestaw[0].getStan() == usunieta && zestaw[1].getStan() == usunieta && zestaw[2].getStan() == usunieta && zestaw[3].getStan() == usunieta && zestaw[4].getStan() == usunieta && zestaw[5].getStan() == usunieta && zestaw[6].getStan() == usunieta && zestaw[7].getStan() == usunieta && zestaw[8].getStan() == usunieta && zestaw[9].getStan() == usunieta && zestaw[10].getStan() == usunieta && zestaw[11].getStan() == usunieta)
 			{
-				Okno_gry->close();
-			}
+				while (Okno_gry->isOpen())
+				{
+					Okno_gry->clear();
+					sf::Text tekst;
+					sf::Font font;
+					font.loadFromFile("PressStart.ttf");
+					std::string tury=std::to_string(liczba_tur);
+					tekst.setString("\n\n\n    WYGRANA!\n\n    Liczba ruchow:" +tury );
 
+					tekst.setCharacterSize(40);
+					tekst.setFont(font);
+					Okno_gry->draw(tekst);
+					Okno_gry->display();
+					Event event;
+					while (Okno_gry->pollEvent(zdarzenie))
+						if (zdarzenie.type == sf::Event::Closed)
+						{
+							Okno_gry->close();
+						}
+				}
+					sleep(time);
+				
+			}
 
 		}
 		rysuj_wszystko(Okno_gry);
@@ -316,6 +344,12 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	void ROZGRYWKA::rysuj_wszystko(RenderWindow*Okno_gry)
 	{
 		Okno_gry->clear();
+		sf::Texture tex_tlo_gra;
+		sf::Sprite tlo_gra;
+		tex_tlo_gra.loadFromFile("tlo_gra.png");
+		tlo_gra.setTexture(tex_tlo_gra);
+		Okno_gry->draw(tlo_gra);
+		
 		for (int i = 0; i < 12; i++)
 		{
 			Okno_gry->draw(zestaw[i].getSprite());

@@ -147,11 +147,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </Image>
     <Image Include="start.png" />
+    <Image Include="tlo_gra.png" />
+    <Image Include="tlo_menu.png" />
     <Image Include="wyjscie.png" />
     <Image Include="zakryta.png" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="HandVetica.ttf" />
+    <Font Include="PressStart.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
