@@ -10,7 +10,7 @@ class PLANSZA:public KARTA
 public:
 	bool czy_to_ta_karta(KARTA*, Vector2i);
 	void pozycja_sprite(KARTA*, float, float);
-	void wczytaj_pliki(KARTA*);
+	void wczytaj_pliki(KARTA*,int);
 	void zaladuj_sprites(KARTA*);
 	void mieszaj(KARTA[12]);
 	void rysuj_sprites(sf::RenderWindow*, KARTA*);
