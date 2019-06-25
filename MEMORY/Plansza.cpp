@@ -6,35 +6,102 @@
 
 using namespace sf;
 
-void PLANSZA::wczytaj_pliki(KARTA *karta) 
+void PLANSZA::wczytaj_pliki(KARTA *karta,int kolor) 
 {
+	if (kolor == 0)
+	{
+		karta->obrazek_zakryta.loadFromFile("zakryta.png");
+
+
+		if (karta->indeks == 1)
+		{
+			karta->obrazek_odkryta.loadFromFile("01.png");
+		}
+		else if (karta->indeks == 2)
+		{
+			karta->obrazek_odkryta.loadFromFile("02.png");
+		}
+		else if (karta->indeks == 3)
+		{
+			karta->obrazek_odkryta.loadFromFile("03.png");
+		}
+		else if (karta->indeks == 4)
+		{
+			karta->obrazek_odkryta.loadFromFile("04.png");
+		}
+		else if (karta->indeks == 5)
+		{
+			karta->obrazek_odkryta.loadFromFile("05.png");
+		}
+		else if (karta->indeks == 6)
+		{
+			karta->obrazek_odkryta.loadFromFile("06.png");
+		}
+	}
 	
-	karta->obrazek_zakryta.loadFromFile("zakryta.png");
 	
 	
-	if(karta->indeks==1)
+	else if(kolor == 1)
 	{
-		karta->obrazek_odkryta.loadFromFile("01.png");
+		karta->obrazek_zakryta.loadFromFile("zakryta1.png");
+
+
+		if (karta->indeks == 1)
+		{
+			karta->obrazek_odkryta.loadFromFile("011.png");
+		}
+		else if (karta->indeks == 2)
+		{
+			karta->obrazek_odkryta.loadFromFile("021.png");
+		}
+		else if (karta->indeks == 3)
+		{
+			karta->obrazek_odkryta.loadFromFile("031.png");
+		}
+		else if (karta->indeks == 4)
+		{
+			karta->obrazek_odkryta.loadFromFile("041.png");
+		}
+		else if (karta->indeks == 5)
+		{
+			karta->obrazek_odkryta.loadFromFile("051.png");
+		}
+		else if (karta->indeks == 6)
+		{
+			karta->obrazek_odkryta.loadFromFile("061.png");
+		}
 	}
-	else if(karta->indeks==2)
+
+
+	else if (kolor == 2)
 	{
-		karta->obrazek_odkryta.loadFromFile("02.png");
-	}
-	else if(karta->indeks==3)
-	{
-		karta->obrazek_odkryta.loadFromFile("03.png");
-	}
-	else if(karta->indeks==4)
-	{
-		karta->obrazek_odkryta.loadFromFile("04.png");
-	}
-	else if(karta->indeks==5)
-	{
-	karta->obrazek_odkryta.loadFromFile("05.png");
-	}
-	else if(karta->indeks==6)
-	{
-		karta->obrazek_odkryta.loadFromFile("06.png");
+		karta->obrazek_zakryta.loadFromFile("zakryta2.png");
+
+
+		if (karta->indeks == 1)
+		{
+			karta->obrazek_odkryta.loadFromFile("012.png");
+		}
+		else if (karta->indeks == 2)
+		{
+			karta->obrazek_odkryta.loadFromFile("022.png");
+		}
+		else if (karta->indeks == 3)
+		{
+			karta->obrazek_odkryta.loadFromFile("032.png");
+		}
+		else if (karta->indeks == 4)
+		{
+			karta->obrazek_odkryta.loadFromFile("042.png");
+		}
+		else if (karta->indeks == 5)
+		{
+			karta->obrazek_odkryta.loadFromFile("052.png");
+		}
+		else if (karta->indeks == 6)
+		{
+			karta->obrazek_odkryta.loadFromFile("062.png");
+		}
 	}
 }
 
@@ -42,7 +109,9 @@ void PLANSZA::zaladuj_sprites(KARTA *karta)
 {
 		if (karta->stan_karty == zakryta)
 		{
+			
 			karta->obrazek.setTexture(karta->obrazek_zakryta);
+			
 		}
 		else if (karta->stan_karty ==odkryta)
 		{
@@ -70,7 +139,6 @@ void PLANSZA::mieszaj(KARTA zestaw_kart[12])
 void PLANSZA::rysuj_sprites(sf::RenderWindow* okno_gry, KARTA* karta)
 {
 	okno_gry->draw(karta->obrazek);
-	
 }
 
 

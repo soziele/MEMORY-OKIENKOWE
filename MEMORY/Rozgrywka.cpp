@@ -4,7 +4,7 @@
 #include<iostream>
 #include <string>
 using namespace sf;
-//int kolor=0;
+int kolor=0;
 
 ROZGRYWKA::ROZGRYWKA()
 {
@@ -45,14 +45,19 @@ ROZGRYWKA::ROZGRYWKA()
 
 void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 {
+	while (Okno_menu->isOpen())
+	{
+
+	int kolor = getKolor();
+
 	sf::Texture Tex_start;
 	sf::Texture Tex_co_to;
 	sf::Texture Tex_wyjscie;
 	sf::Texture Tex_tlo;
 	//----------------------------
-	//sf::Texture Tex_kolo1;
-	//sf::Texture Tex_kolo2;
-	//sf::Texture Tex_kolo3;
+	sf::Texture Tex_kolo1;
+	sf::Texture Tex_kolo2;
+	sf::Texture Tex_kolo3;
 
 
 	sf::Sprite start;
@@ -60,21 +65,37 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 	sf::Sprite wyjscie;
 	sf::Sprite tlo;
 	//----------------------------
-	//sf::Sprite kolo1;
-	//sf::Sprite kolo2;
-	//sf::Sprite kolo3;
+	sf::Sprite kolo1;
+	sf::Sprite kolo2;
+	sf::Sprite kolo3;
 
 
 
-
-	Tex_start.loadFromFile("start.png");
-	Tex_co_to.loadFromFile("co_to.png");
-	Tex_wyjscie.loadFromFile("wyjscie.png");
-	Tex_tlo.loadFromFile("tlo_menu.png");
+	if (kolor == 0)
+	{
+		Tex_start.loadFromFile("start.png");
+		Tex_co_to.loadFromFile("co_to.png");
+		Tex_wyjscie.loadFromFile("wyjscie.png");
+		Tex_tlo.loadFromFile("tlo_menu.png");
+	}
+	else if (kolor == 1)
+	{
+		Tex_start.loadFromFile("start1.png");
+		Tex_co_to.loadFromFile("co_to1.png");
+		Tex_wyjscie.loadFromFile("wyjscie1.png");
+		Tex_tlo.loadFromFile("tlo_menu1.png");
+	}
+	else if (kolor == 2)
+	{
+		Tex_start.loadFromFile("start2.png");
+		Tex_co_to.loadFromFile("co_to2.png");
+		Tex_wyjscie.loadFromFile("wyjscie2.png");
+		Tex_tlo.loadFromFile("tlo_menu2.png");
+	}
 	//---------------------------------------
-	//Tex_kolo1.loadFromFile("");
-	//Tex_kolo2.loadFromFile("");
-	//Tex_kolo3.loadFromFile("");
+	Tex_kolo1.loadFromFile("kolo1.png");
+	Tex_kolo2.loadFromFile("kolo2.png");
+	Tex_kolo3.loadFromFile("kolo3.png");
 
 
 
@@ -83,21 +104,27 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 	wyjscie.setTexture(Tex_wyjscie);
 	tlo.setTexture(Tex_tlo);
 	//---------------------------------
-	//kolo1.setTexture(Tex_kolo1);
-	//kolo2.setTexture(Tex_kolo2);
-	//kolo3.setTexture(Tex_kolo3);
+	kolo1.setTexture(Tex_kolo1);
+	kolo2.setTexture(Tex_kolo2);
+	kolo3.setTexture(Tex_kolo3);
 
 
 	start.setPosition(685, 300);
 	co_to.setPosition(650, 400);
 	wyjscie.setPosition(614, 500);
 	//-------------------------------------
-	//kolo1.setPosition(41, 342);
-	//kolo2.setPosition(191, 342);
-	//kolo3.setPosition(341, 342);
+	kolo1.setPosition(41, 342);
+	kolo2.setPosition(191, 342);
+	kolo3.setPosition(341, 342);
 
-	while (Okno_menu->isOpen())
-	{
+
+
+
+
+
+
+
+
 		Okno_menu->clear();
 		Okno_menu->draw(tlo);
 		Okno_menu->draw(start);
@@ -153,21 +180,21 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 				}
 			
 
-				/*
+				
 
 
 				if (pozycja_myszy_klik.x > 41 && pozycja_myszy_klik.x < 170 && pozycja_myszy_klik.y > 342 && pozycja_myszy_klik.y < 551)
-					kolor = 0;
+					setKolor(0);
 			
 			
 				if (pozycja_myszy_klik.x > 191 && pozycja_myszy_klik.x < 320 && pozycja_myszy_klik.y > 342 && pozycja_myszy_klik.y < 551)
-					kolor = 1;
+					setKolor(1);
 
 
 				if (pozycja_myszy_klik.x > 341 && pozycja_myszy_klik.x < 470 && pozycja_myszy_klik.y > 342 && pozycja_myszy_klik.y < 551)
-					kolor = 2;
+					setKolor(2);
 				
-				*/
+				
 			}
 		}
 		sf::Vector2i pozycja_myszy_ruch = sf::Mouse::getPosition(*Okno_menu);
@@ -192,7 +219,7 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 
 
 
-		/*
+		
 
 		if (pozycja_myszy_ruch.x > 41 && pozycja_myszy_ruch.x < 170 && pozycja_myszy_ruch.y > 342 && pozycja_myszy_ruch.y < 551)
 		{
@@ -209,13 +236,16 @@ void ROZGRYWKA::menu(sf::RenderWindow* Okno_menu)
 		{
 			kolo3.setScale(1.03, 1.03);
 		}
-		*/
+		
 
 
 
 		Okno_menu->draw(start);
 		Okno_menu->draw(co_to);
 		Okno_menu->draw(wyjscie);
+		Okno_menu->draw(kolo1);
+		Okno_menu->draw(kolo2);
+		Okno_menu->draw(kolo3);
 		Okno_menu->display();
 	}
 }
@@ -241,9 +271,10 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 	while (Okno_gry->isOpen())
 	{
 		float X = 30, Y = 100;
+		int kolo = getKolor();
 		for (int i = 0; i < 6; i++)
 		{
-			Plansza.wczytaj_pliki(&zestaw[i]);
+			Plansza.wczytaj_pliki(&zestaw[i],kolo);
 			Plansza.zaladuj_sprites(&zestaw[i]);
 			Plansza.pozycja_sprite(&zestaw[i], X, Y);
 			X += 160;
@@ -252,12 +283,13 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 		X -= 960;
 		for (int i = 6; i < 12; i++)
 		{
-			Plansza.wczytaj_pliki(&zestaw[i]);
+			Plansza.wczytaj_pliki(&zestaw[i],kolo);
 			Plansza.zaladuj_sprites(&zestaw[i]);
 			Plansza.pozycja_sprite(&zestaw[i], X, Y);
 
 			X += 160;
 		}
+
 		sf::Time time = sf::seconds(1);
 
 		sf::Event zdarzenie;
@@ -406,8 +438,9 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 					sleep(time);
 				
 			}
-
+			
 		}
+	
 		rysuj_wszystko(Okno_gry);
 		}
 
@@ -415,13 +448,27 @@ void ROZGRYWKA::aktualizuj(sf::RenderWindow* Okno_gry)
 
 	void ROZGRYWKA::rysuj_wszystko(RenderWindow*Okno_gry)
 	{
+		int kolor = getKolor();
 		Okno_gry->clear();
+
 		sf::Texture tex_tlo_gra;
 		sf::Sprite tlo_gra;
-		tex_tlo_gra.loadFromFile("tlo_gra.png");
+		if (kolor == 0)
+		{
+			tex_tlo_gra.loadFromFile("tlo_gra.png");
+		}
+		else if (kolor == 1)
+		{
+			tex_tlo_gra.loadFromFile("tlo_gra1.png");
+		}
+		else if (kolor == 2)
+		{
+			tex_tlo_gra.loadFromFile("tlo_gra2.png");
+		}
 		tlo_gra.setTexture(tex_tlo_gra);
 		Okno_gry->draw(tlo_gra);
 		
+
 		for (int i = 0; i < 12; i++)
 		{
 			Okno_gry->draw(zestaw[i].getSprite());
